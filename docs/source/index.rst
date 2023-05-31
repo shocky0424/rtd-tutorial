@@ -117,7 +117,7 @@ Subscript of the response quantities in the following recorders refer to the num
    :header: "Recorder", "Description"
    :widths: 20, 40
    
-   Parameters, "Temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`), Coefficients of friction (:math:`\mu_{2,3}`, :math:`\mu_1`, :math:`\mu_4`), Heat Fluxes (:math:`HeatFlux_{2,3}`, :math:`HeatFlux_{1}`, :math:`HeatFlux_4`)"
+   Parameters, "Temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`),  Friction coefficients (:math:`\mu_{2,3}`, :math:`\mu_1`, :math:`\mu_4`), Heat Fluxes (:math:`HeatFlux_{2,3}`, :math:`HeatFlux_{1}`, :math:`HeatFlux_4`), Pressure dependency factors (:math:`k_{p2,3}`, :math:`k_{p1}`, :math:`k_{p4}`), Temperature dependency factors (:math:`k_{T2,3}`, :math:`k_{T1}`, :math:`k_{T4}`), and Velocity dependency factors (:math:`k_{v2,3}`, :math:`k_{v1}`, :math:`k_{v4}`)."
 
 .. admonition:: Example
 **Tcl Code**
