@@ -136,17 +136,12 @@ Example
 The following codes construct Example 3 in Kim and Constantinou (2023). 
 
 .. code-block:: tcl
+# Modeling of Triple FP isolator  			  		    
+# Written By: Hyun-myung Kim (hkim59@buffalo.edu)			    
+# Date: May, 2023 							    
 
-#---------------------------------------------------------------------------#
-#-------Department of Civil, Structural and Environmental Engineering-------#
-#---------------------------University at Buffalo---------------------------#
-#Modeling of Triple FP isolator  			  		    #
-#Written By: Hyun-myung Kim (hkim59@buffalo.edu)			    #
-#Date: May, 2023 							    #
-#---------------------------------------------------------------------------#
-
-#Units: N, m, sec
-#Remove existing model
+# Units: N, m, sec
+# Remove existing model
 wipe
 
 # EXAMPLE 3 (Kim and Constantinou 2023 https://doi.org/10.1002/eqe.3797)
