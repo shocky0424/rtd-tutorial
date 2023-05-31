@@ -1,5 +1,4 @@
 
-
 TripleFrictionPendulumX Element
 ^^^^^^^^^^^^^^^^
 
