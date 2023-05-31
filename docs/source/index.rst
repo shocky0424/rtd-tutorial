@@ -119,10 +119,9 @@ Subscript “:math:`i`” of the response quantities in the following recorders 
    
 Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>compDisplacement"
 
-   Parameters, "Temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`), coefficients of friction (:math:`\mu_{2,3}`, :math:`\mu_1`, :math:`\mu_4`), Heat Fluxes (:math:`HeatFlux_{2,3}`, :math:`HeatFlux_{1}`, :math:`HeatFlux_4`), pressure dependency factors (:math:`k_{P2,3}`, :math:`k_{P1}`, :math:`k_{P4}`), temperature dependency factors (:math:`k_{T2,3}`, :math:`k_{T1}`, :math:`k_{T4}`), and velocity dependency factors (kv2,3, kv1, kv4).
+   Parameters, "Temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`), coefficients of friction (:math:`\mu_{2,3}`, :math:`\mu_1`, :math:`\mu_4`), Heat Fluxes (HeatFlux:math:`_{2,3}`, HeatFlux:math:`_{1}`, HeatFlux:math:`_4`), pressure dependency factors (:math:`k_{P2,3}`, :math:`k_{P1}`, :math:`k_{P4}`), temperature dependency factors (:math:`k_{T2,3}`, :math:`k_{T1}`, :math:`k_{T4}`), and velocity dependency factors (:math:`k_{v2,3}`, :math:`k_{v1}`, :math:`k_{v4}`).
    
-Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>Parameters
-"
+Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>Parameters"
 
 .. admonition:: Example
 **Tcl Code**
