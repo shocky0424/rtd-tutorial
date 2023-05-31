@@ -134,7 +134,7 @@ Example
 
 .. admonition:: Example 
 
-The following code constructs Example 3 in Kim and Constantinou (2023). 
+   The following code constructs Example 3 in Kim and Constantinou (2023). 
 
    1. **Tcl Code**
 
