@@ -146,28 +146,28 @@ Example
       # Date: May, 2023 	
       # --------------------------------------------------------------------------------------------------
       
-#Units: N, m, sec
-#Remove existing model
-wipe
+      # Units: N, m, sec
+      # Remove existing model
+      wipe
 
-# EXAMPLE 3 (Kim and Constantinou 2023 https://doi.org/10.1002/eqe.3797)
-#----------------------------------------------------------------------------
-# User Defined Parameters
-#----------------------------------------------------------------------------
+      # EXAMPLE 3 (Kim and Constantinou 2023 https://doi.org/10.1002/eqe.3797)
+      #----------------------------------------------------------------------------
+      # User Defined Parameters
+      #----------------------------------------------------------------------------
 
-# TFP Geomoetry of Configuration A 
-set L1 0.3937;			# Effective radii of curvature (m)
-set L2 3.7465;
-set L3 3.7465;
-set d1 0.0716;			# Actual displacement capacity (m)
-set d2 0.5043;
-set d3 0.5043;
-set b1 [expr 0.508];  	# Diameter of contact area at the sliding surface (m) 
-set b2 [expr 0.711];  
-set b3 [expr 0.711];  
-set r1 [expr $b1/2];  	# Radius of contact area at the sliding surface (m) 
-set r2 [expr $b2/2];  
-set r3 [expr $b3/2];  
+      # TFP Geomoetry of Configuration A 
+      set L1 0.3937;			# Effective radii of curvature (m)
+      set L2 3.7465;
+      set L3 3.7465;
+      set d1 0.0716;			# Actual displacement capacity (m)
+      set d2 0.5043;
+      set d3 0.5043;
+      set b1 [expr 0.508];  	# Diameter of contact area at the sliding surface (m) 
+      set b2 [expr 0.711];  
+      set b3 [expr 0.711];  
+      set r1 [expr $b1/2];  	# Radius of contact area at the sliding surface (m) 
+      set r2 [expr $b2/2];  
+      set r3 [expr $b3/2];  
 
 set uy 0.001; 			# Yield displacement (m)   
 set kvc 8000000000.; 	# vertical compression stiffness (N/m)
