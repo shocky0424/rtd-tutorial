@@ -340,7 +340,7 @@ Example
          puts "Transient analysis completed FAILED";    
       }
       
-      .. admonition:: References 
+.. admonition:: References 
 
    #. Dao, N. D., Ryan, K. L., Sato, E. and Sasaki, T. (2013). “Predicting the displacement of triple pendulum bearings in a full-scale shaking experiment using a three-dimensional element”, Earthquake engineering and structural dynamics, 42(11), 1677-1695. doi.org/10.1002/eqe.2293.
 	
