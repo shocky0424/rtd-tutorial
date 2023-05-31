@@ -50,7 +50,7 @@ Input Parameters
 
 .. csv-table:: 
    :header: "Argument", "Type", "Description"
-   :widths: 5, 5, 40
+   :widths: 3, 3, 40
    
    $eleTag, |integer|, "Unique element object tag"
    $iNode $jNode, |integer| |integer|, "End nodes"
@@ -139,7 +139,6 @@ The following code constructs Example 3 in Kim and Constantinou (2023).
 
 .. code-block:: tcl
 
-# TFP Geomoetry of Configuration A 
 set L1 0.3937;			# Effective radii of curvature (m)
 set L2 3.7465;
 set L3 3.7465;
@@ -154,16 +153,4 @@ set r2 [expr $b2/2];
 set r3 [expr $b3/2];  						    
 
 
-.. admonition:: References 
 
-   #. Dao, N. D., Ryan, K. L., Sato, E. and Sasaki, T. (2013). “Predicting the displacement of triple pendulum bearings in a full-scale shaking experiment using a three-dimensional element”, Earthquake engineering and structural dynamics, 42(11), 1677-1695. doi.org/10.1002/eqe.2293
-	
-   #. Kim, H-M., and Constantinou, M. C. (2022). “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
-	
-   #. Kim, H-M., and Constantinou, M. C. (2023a). “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics. doi.org/10.1002/eqe.3797
-	
-   #. Kim, H-M., and Constantinou, M. C. (2023b). “Development of Performance-based Testing Specifications for Seismic Isolators”, Report No. MCEER-23-xxxx, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
-   
-   #. Kumar, M., Whittaker, A. S., and Constantinou, M. C. (2015). “Characterizing friction in sliding isolation bearings”, Earthquake Engineering & Structural Dynamics, 44(9), 1409-1425. doi.org/10.1002/eqe.2524
-   
-Code Developed by: **Hyun-myung Kim** and **Michael C. Constantinou**, University at Buffalo, NY
