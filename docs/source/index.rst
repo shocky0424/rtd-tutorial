@@ -2,6 +2,9 @@
 TripleFrictionPendulumX Element
 ^^^^^^^^^^^^^^^^
 
+Description
+#########
+
 This command is used to construct a TripleFrictionPendulumX element (Kim and Constantinou, 2022,2023a) object, which is an extension of a TripleFrictionPendulum element (Dao et al., 2013). 
 
 The horizontal behavior of the element is achieved by the series model, which consists of properly combined hysteretic/frictional and multidirectional gap elements. 
@@ -38,7 +41,9 @@ For more information about the element formulation, please refer to the referenc
    :width: 700
 
    Geometry of Triple FP bearing in accordance with OpenSees Commands
-   
+  
+Input Parameters
+#########
 .. admonition:: Command
 
    **element TripleFrictionPendulumX $eleTag $iNode $jNode $Tag $vertMatTag $rotZMatTag $rotXMatTag $rotYMatTag $kpFactor $kTFactor $kvFactor $Mu1 $Mu2 $Mu3 $L1 $L2 $L3 $d1_star $d2_star $d3_star $b1 $b2 $b3 $W $uy $kvt $minFv $Tol $refPressure1 $refPressure2 $refPressure3 $Diffusivity $Conductivity $Temperature0 $rateParameter $unit $kTmodels**
