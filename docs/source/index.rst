@@ -57,9 +57,11 @@ For more information about the element formulation, please refer to the referenc
    $kvFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous velocity at the sliding surface. :math:`k_{v}=(1-0.5e^{-av})`"
    $Mu1 $Mu2 $Mu3, |float| |float| |float|, "Reference friction coefficients, :math:`\mu_i`"
    $L1 $L2 $L3, |float| |float| |float|, "Effective radii of cuvature. :math:`L_i = R_i – h_i`"
-   $d1_star $d2_star $d3_star, |float| |float| |float|, "Actual displacement limits of pendulums. :math:`d_i^* = L_i/R_i·d_i', :math:`d_i` = Nominal displacement capacity of each sliding interface"
+   $d1_star $d2_star $d3_star, |float| |float| |float|, "Actual displacement limits of pendulums. :math:`d_i^* = L_i/R_i·d_i`, :math:`d_i` = Nominal displacement capacity of each sliding interface"
    $b1 $b2 $b3, |float| |float| |float|, "Diameters of the rigid slider and the two inner slide plates"
-
+   $W, |float|, "Axial force used for the first trial of the first analysis step"
+   $uy, |float|, "Lateral displacement where sliding of the bearing starts. Recommended value = 0.025 to 1 mm. A smaller value may cause convergence problem"
+   $kvt, |float|, "Tension stiffness kvt of the bearing"
    
 .. admonition:: Recorders
 Recorders
