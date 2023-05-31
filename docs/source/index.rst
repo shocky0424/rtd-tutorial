@@ -2,9 +2,6 @@
 TripleFrictionPendulumX Element
 ^^^^^^^^^^^^^^^^
 
-Description
-#########
-
 This command is used to construct a TripleFrictionPendulumX element (Kim and Constantinou, 2022,2023a) object, which is an extension of a TripleFrictionPendulum element (Dao et al., 2013). 
 
 The horizontal behavior of the element is achieved by the series model, which consists of properly combined hysteretic/frictional and multidirectional gap elements. 
@@ -42,8 +39,6 @@ For more information about the element formulation, please refer to the referenc
 
    Geometry of Triple FP bearing in accordance with OpenSees Commands
   
-Input Parameters
-#########
 .. admonition:: Command
 
    **element TripleFrictionPendulumX $eleTag $iNode $jNode $Tag $vertMatTag $rotZMatTag $rotXMatTag $rotYMatTag $kpFactor $kTFactor $kvFactor $Mu1 $Mu2 $Mu3 $L1 $L2 $L3 $d1_star $d2_star $d3_star $b1 $b2 $b3 $W $uy $kvt $minFv $Tol $refPressure1 $refPressure2 $refPressure3 $Diffusivity $Conductivity $Temperature0 $rateParameter $unit $kTmodels**
@@ -98,9 +93,9 @@ Input Parameters
    2: :math:`k_{T}=0.97((0.7)^{0.029T}+0.22)` (:math:`k_{T}` = 1/3 at 200℃)
    
    3: :math:`k_{T}=0.84((0.7)^{0.0085T}+0.25)` (:math:`k_{T}` = 2/3 at 200℃)"
+
 .. admonition:: Recorders
-Recorders
-#########
+
 **Typical Element Recorders**
 
 Typical recorders for two-node element are available in the TripleFrictionPendulumX element.
@@ -129,8 +124,6 @@ Subscripts of the response quantities in the following recorders refer to the nu
       
    *Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>Parameters*"
 
-Example
-#########
 
 .. admonition:: Example 
 
