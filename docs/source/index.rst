@@ -73,14 +73,14 @@ For more information about the element formulation, please refer to the referenc
    $kTmodel, |integer|, "Temperature-dependent friction models (3), 1: :math:`k_{T}=0.79((0.7)^{0.02T}+0.40)` (:math:`k_{T} = 1/2 at 200℃'), 2: :math:`k_{T}=0.97((0.7)^{0.029T}+0.22)` (:math:`k_{T} = 1/3 at 200℃'),3: :math:`k_{T}=0.84((0.7)^{0.0085T}+0.25)` (:math:`k_{T} = 2/3 at 200℃')"
 
 
-Recorders
-#########
+.. admonition:: Recorders
 **Typical Element Recorders**
 Typical recorders for two-node element are available in the TripleFrictionPendulumX element.
 
 .. csv-table:: 
    :header: "Recorder", "Description"
    :widths: 20, 40
+   
    globalForce, global forces
    localForce, local forces
    basicForce, basic forces
