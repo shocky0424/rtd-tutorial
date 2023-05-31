@@ -111,15 +111,15 @@ Typical recorders for two-node element are available in the TripleFrictionPendul
 
 **TripleFrictionPendulumX Element Recorders**
 
-Subscript of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
+Subscripts of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
 
 .. csv-table:: 
    :header: "Recorder", "Description"
    :widths: 20, 40
    
-   Parameters, "temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`),  friction coefficients (:math:`\mu_{2,3}`, :math:`\mu_1`, :math:`\mu_4`), heat fluxes (:math:`HeatFlux_{2,3}`, :math:`HeatFlux_{1}`, :math:`HeatFlux_4`), pressure dependency factors (:math:`k_{p2,3}`, :math:`k_{p1}`, :math:`k_{p4}`), temperature dependency factors (:math:`k_{T2,3}`, :math:`k_{T1}`, :math:`k_{T4}`), and velocity dependency factors (:math:`k_{v2,3}`, :math:`k_{v1}`, :math:`k_{v4}`).
-      
-   *Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>Parameters*"
+   compDisplacement, "Displacements (:math:`u_i`) and velocities (:math:`v_i`) at each sliding surface in the x and y directions :math:`(u_{2x}+u_{3x})/2`, :math:`u_{1x},u_{4x}`,  :math:`(u_{2y}+u_{3y})/2`, :math:`u_{1y}`, :math:`u_{4y}`, :math:`(v_{2x}+v_{3x})/2`, :math:`v_{1x}`,:math:`v_{4x}`,  :math:`(v_{2y}+v_{3y})/2`,:math:`v_{1y}`,:math:`v_{4y}` in accordance with Approach 1 (See Section 3 in Kim and Constantinou, 2022). 
+   
+   *Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>compDisplacement*"
 
 .. admonition:: Example
 **Tcl Code**
