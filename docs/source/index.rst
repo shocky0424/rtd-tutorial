@@ -97,6 +97,7 @@ For more information about the element formulation, please refer to the referenc
 Recorders
 #########
 **Typical Element Recorders**
+
 Typical recorders for two-node element are available in the TripleFrictionPendulumX element.
 
 .. csv-table:: 
@@ -109,13 +110,14 @@ Typical recorders for two-node element are available in the TripleFrictionPendul
    basicDisplacement, basic displacements
 
 **TripleFrictionPendulumX Element Recorders**
+
 Subscript of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
 
 .. csv-table:: 
    :header: "Recorder", "Description"
    :widths: 20, 40
    
-   Parameters, "Temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`)"
+   Parameters, "Temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`), Coefficients of friction (:math:`\mu_{2,3}`, :math:`\mu_1`, :math:`\mu_4`), Heat Fluxes (:math:`HeatFlux_{2,3}`, :math:`HeatFlux_{1}`, :math:`HeatFlux_4`)"
 
 .. admonition:: Example
 **Tcl Code**
