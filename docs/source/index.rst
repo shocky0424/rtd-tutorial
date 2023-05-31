@@ -134,93 +134,206 @@ Example
 
 .. admonition:: Example 
 
-   The following codes construct Example 4.6 in Du and Hajjar (2021). The libraries can be found from the OpenSeesWiki. The definition of the angle section (L3x2x0_25.tcl) is not provided here, but the mesh information is shown in the following Python code. Note that in order for clarity the mesh here is coarser than that used in Du and Hajjar (2021).
+   The following code constructs Example 3 in Kim and Constantinou (2023). 
 
    1. **Tcl Code**
 
    .. code-block:: tcl
 
       # --------------------------------------------------------------------------------------------------
-      # 3D Steel L-section beam subjected to compressive load on shear center
-      # Xinlong Du, 9/25/2019
-      # Displacement-based beam-column element for asymmetric sections
+      # Modeling of Triple FP isolator 
+      # Written By: Hyun-myung Kim (hkim59@buffalo.edu)
+      # Date: May, 2023 	
       # --------------------------------------------------------------------------------------------------
-      set systemTime [clock seconds] 
-      puts "Starting Analysis: [clock format $systemTime -format "%d-%b-%Y %H:%M:%S"]"
-      set startTime [clock clicks -milliseconds];
-      # SET UP ----------------------------------------------------------------------------
-      wipe;				# clear memory of all past model definitions
-      model BasicBuilder -ndm 3 -ndf 6;	# Define the model builder, ndm=#dimension, ndf=#dofs
-      set dataDir Data;			# set up name of data directory
-      file mkdir $dataDir; 			# create data directory
-      source LibUnits.tcl;			# define units
-      source DisplayPlane.tcl;		# procedure for displaying a plane in model
-      source DisplayModel3D.tcl;		# procedure for displaying 3D perspectives of model
-      # define GEOMETRY ------------------------------------------------------------------
-      #Nodes, NodeNumber, xCoord, yCoord, zCoord
-      for {set i 1} {$i<8} {incr i 1} {
-	      node $i [expr -9.2+9.2*$i] 0 0;
-      }
-      # ------ define boundary conditions
-      # NodeID,dispX,dispY,dispZ,rotX,RotY,RotZ 
-      fix 1  1 1 1 1 1 1;    
-      set StartNode 1;
-      set EndNode 7;
-      # Define  SECTIONS -------------------------------------------------------------
-      set ColSecTag 1
-      # define MATERIAL properties 
-      set Es [expr 27910.0*$ksi];		# Steel Young's Modulus
-      set nu 0.3;
-      set Gs [expr $Es/2./[expr 1+$nu]];  # Torsional stiffness Modulus
-      set matID 1
-      uniaxialMaterial Elastic $matID $Es;
-      set J [expr  0.02473958*$in4]
-      set GJ [expr $Gs*$J]
-      set z0 [expr 0.64625474*$in];
-      set y0 [expr -0.68720012*$in];
-      source L3x2x0_25.tcl;
-      # define ELEMENTS-----------------------------------------------------------------------------------------------
-      set IDColTransf 1; # all members
-      set ColTransfType Corotational;		# options for columns: Linear PDelta Corotational 
-      geomTransf $ColTransfType  $IDColTransf 0 0 1;	#define geometric transformation: performs a corotational geometric transformation
-      set numIntgrPts 2;	# number of Gauss integration points
-      for {set i 1} {$i<$EndNode} {incr i 1} {
-      set elemID $i
-      set nodeI $i
-      set nodeJ [expr $i+1]
-      element dispBeamColumnAsym $elemID $nodeI $nodeJ $numIntgrPts $ColSecTag $IDColTransf -shearCenter $y0 $z0;	
-      } 
+      
+#Units: N, m, sec
+#Remove existing model
+wipe
 
-      # Define RECORDERS -------------------------------------------------------------
-      recorder Node -file $dataDir/DispDB6.out -time -node $EndNode -dof 1 2 3 4 5 6 disp;			# displacements of middle node
-      recorder Node -file $dataDir/ReacDB6.out -time -node $StartNode -dof 1 2 3 4 5 6 reaction;		# support reaction
+# EXAMPLE 3 (Kim and Constantinou 2023 https://doi.org/10.1002/eqe.3797)
+#----------------------------------------------------------------------------
+# User Defined Parameters
+#----------------------------------------------------------------------------
 
-      # Define DISPLAY -------------------------------------------------------------
-      DisplayModel3D DeformedShape;	 # options: DeformedShape NodeNumbers ModeShape
+# TFP Geomoetry of Configuration A 
+set L1 0.3937;			# Effective radii of curvature (m)
+set L2 3.7465;
+set L3 3.7465;
+set d1 0.0716;			# Actual displacement capacity (m)
+set d2 0.5043;
+set d3 0.5043;
+set b1 [expr 0.508];  	# Diameter of contact area at the sliding surface (m) 
+set b2 [expr 0.711];  
+set b3 [expr 0.711];  
+set r1 [expr $b1/2];  	# Radius of contact area at the sliding surface (m) 
+set r2 [expr $b2/2];  
+set r3 [expr $b3/2];  
 
-      # define Load------------------------------------------------------------- 
-      set N 15.0;
-      pattern Plain 2 Linear {
-        # NodeID, Fx, Fy, Fz, Mx, My, Mz
-        load $EndNode -$N 0 0 0 0 0; 
-      }
+set uy 0.001; 			# Yield displacement (m)   
+set kvc 8000000000.; 	# vertical compression stiffness (N/m)
+set kvt 1.; 			# vertical tension stiffness (N/m)
+set minFv 0.1; 			# minimum compression force in the bearing (N)
 
-      # define ANALYSIS PARAMETERS------------------------------------------------------------------------------------
-      constraints Plain; # how it handles boundary conditions
-      numberer Plain;	   # renumber dof's to minimize band-width 
-      system BandGeneral;# how to store and solve the system of equations in the analysis
-      test NormDispIncr 1.0e-08 1000; # determine if convergence has been achieved at the end of an iteration step
-      #algorithm NewtonLineSearch;# use Newton's solution algorithm: updates tangent stiffness at every iteration
-      algorithm Newton;
-      set Dincr -0.01;
-                                     #Node,  dof, 1st incr, Jd, min,   max
-      integrator DisplacementControl $EndNode 1   $Dincr     1  $Dincr -0.01;
-      analysis Static	;# define type of analysis static or transient
-      analyze 7000;
-      puts "Finished"
-      #--------------------------------------------------------------------------------
-      set finishTime [clock clicks -milliseconds];
-      puts "Time taken: [expr ($finishTime-$startTime)/1000] sec"
-      set systemTime [clock seconds] 
-      puts "Finished Analysis: [clock format $systemTime -format "%d-%b-%Y %H:%M:%S"]"
+set g 	9.81; 			# gravity acceleration (m/s^2)
+set P 	13345e+03; 		# Load on top of TFP 
+set Mass [expr $P/$g];  # Mass on top of TFP 
+set tol 1.e-5; 			# Relative tolerance for checking convergence
 
+# Heat parameters
+set Diffu 0.444e-5;		# Thermal diffusivity (m^2/sec)
+set Conduct 18; 		# Thermal conductivity (W/m*Celsius)
+set Temperature0 20; 	# Initial temperature (Celsius)
+
+# Friction coefficients (reference)
+set mu1 0.01; 
+set mu2 0.04;
+set mu3 0.08;
+
+# Reference Pressure
+set Pref1 [expr $P/($r1*$r1*3.141592)];
+set Pref2 [expr $P/($r2*$r2*3.141592)];
+set Pref3 [expr $P/($r3*$r3*3.141592)];
+
+#----------------------------------------------------------------------------
+# Start of model generation
+#----------------------------------------------------------------------------
+
+#Create Model Builder
+model basic -ndm 3 -ndf 6
+
+# Create nodes
+node 1 0 0 0; # End i
+node 2 0 0 0; # End j
+
+# Define single point constraints 
+fix 1 	1 1 1 1 1 1;
+
+# Define friction models
+set tagTemp 1;
+set tagVel 0;
+set tagPres 0;
+set velRate 100;
+
+#----------------------------------------------------------------------------
+# Bring material models and define element
+#----------------------------------------------------------------------------
+
+# Creating material for compression and rotation behaviors
+uniaxialMaterial Elastic 1 $kvc;
+uniaxialMaterial Elastic 2 10.;
+
+set tagT 1; 
+
+# Define TripleFrictionPendulumX element
+# element TripleFrictionPendulumX $eleTag $iNode $jNode $tagT $vertMatTag $rotZMatTag $rotXMatTag $rotYMatTag $tagPres $tagTemp $tagVel $mu1 $mu2 $mu3 $L1 $L2 $L3 $d1 $d2 $d3 $b1 $b2 $b3 $W $uy $kvt $minFv $tol $Pref1 $Pref2 $Pref3 $Diffu $Conduct $Temperature0 $velRate $unit $kTmodel
+element TripleFrictionPendulumX 1 1 2  $tagT  1 2 2 2 $tagPres $tagTemp $tagVel $mu1 $mu2 $mu3 $L1 $L2 $L3 $d1 $d2 $d3 $b1 $b2 $b3 $P $uy $kvt $minFv $tol $Pref1 $Pref2 $Pref3 $Diffu $Conduct $Temperature0 $velRate 1 1;
+
+#----------------------------------------------------------------------------
+# Apply gravity load
+#----------------------------------------------------------------------------
+
+#Create a plain load pattern with linear timeseries
+pattern Plain 1 "Linear" {
+	
+	load 2 0. 0. -[expr $P] 0.0 0.0 0.0
+}
+
+#----------------------------------------------------------------------------
+# Start of analysis generation (Gravity)
+#----------------------------------------------------------------------------
+
+system BandSPD
+constraints Transformation
+numberer RCM
+test NormDispIncr 1.0e-15 10 3
+algorithm Newton
+integrator LoadControl 1
+analysis Static
+
+#----------------------------------------------------------------------------
+# Analysis (Gravity)
+#----------------------------------------------------------------------------
+
+analyze 1
+puts "Gravity analysis completed SUCCESSFULLY";
+
+#----------------------------------------------------------------------------
+# Start of analysis generation 
+# (Sinusoidal; Two cycles of 5s period and 508mm amplitude)
+#----------------------------------------------------------------------------
+
+loadConst -time 0.0
+
+#analysis time step 
+set dt [expr 0.008]
+
+#excitation time step
+set dt1 [expr 0.001] 
+
+timeSeries Trig 11 $dt 10 5 -factor 0.508 -shift 0
+
+pattern MultiSupport 2 {
+groundMotion 1 Plain -disp 11 
+# Node, direction, GMtag
+imposedMotion 2 2 1
+}
+
+#----------------------------------------------------------------------------
+# Start of recorder generation (Sinusoidal)
+#----------------------------------------------------------------------------
+
+# Set up recorder
+set OutDir 		EXAMPLE3;			# Output folder
+set OutFile1	TEMPERATURE.txt;
+set OutFile2 	DISP.txt; 		  
+set OutFile3	FORCE.txt;
+set OutFile4	COMPDISP.txt;
+
+file mkdir $OutDir;
+recorder Element -file $OutDir/$OutFile1 -time -ele 1 Parameters;
+recorder Node -file $OutDir/$OutFile2 -time -nodes 2 -dof 1 2 3 disp;
+recorder Element -file $OutDir/$OutFile3 -time -ele 1 basicForce;
+recorder Element -file $OutDir/$OutFile4 -time -ele 1 compDisplacement;
+
+#----------------------------------------------------------------------------
+# Analysis (Sinusoidal)
+#----------------------------------------------------------------------------
+
+system SparseGeneral
+constraints Transformation
+test NormDispIncr 1.0e-5 20 0
+algorithm Newton
+numberer Plain
+integrator Newmark 0.5 0.25
+analysis Transient
+
+# set some variables
+set tFinal [expr 10]
+set tCurrent [getTime]
+set ok 0
+
+# Perform the transient analysis
+while {$ok == 0 && $tCurrent < $tFinal} {
+    
+    set ok [analyze 1 $dt]
+    
+    # if the analysis fails try initial tangent iteration
+    if {$ok != 0} {
+	puts "regular newton failed .. lets try an initail stiffness for this step"
+	test NormDispIncr 1.0e-12  100 0
+	algorithm ModifiedNewton -initial
+	set ok [analyze 1 $dt]
+	if {$ok == 0} {puts "that worked .. back to regular newton"}
+	test NormDispIncr 1.0e-12  10 
+	algorithm Newton
+    }
+    
+    set tCurrent [getTime]
+}
+
+# Print a message to indicate if analysis succesfull or not
+if {$ok == 0} {
+   puts "Transient analysis completed SUCCESSFULLY";
+} else {
+   puts "Transient analysis completed FAILED";    
+}
