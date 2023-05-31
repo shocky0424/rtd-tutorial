@@ -129,17 +129,20 @@ Subscripts of the response quantities in the following recorders refer to the nu
       
    *Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>Parameters*"
 
+Example
+#########
 .. admonition:: Example
 **Tcl Code**
 The following codes construct Example 3 in Kim and Constantinou (2023). 
 
 .. code-block:: tcl
+
 #############################################################################
 #-------Department of Civil, Structural and Environmental Engineering-------#
 #---------------------------University at Buffalo---------------------------#
-#Modeling of Triple FP isolator  			  					   			#
-#Written By: Hyun-myung Kim (hkim59@buffalo.edu)							#
-#Date: May, 2023 															#
+#Modeling of Triple FP isolator  			  		    #
+#Written By: Hyun-myung Kim (hkim59@buffalo.edu)			    #
+#Date: May, 2023 							    #
 #############################################################################
 
 #Units: N, m, sec
