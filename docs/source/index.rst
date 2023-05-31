@@ -140,11 +140,13 @@ Example
 
    .. code-block:: tcl
 
-      # --------------------------------------------------------------------------------------------------
-      # Modeling of Triple FP isolator 
-      # Written By: Hyun-myung Kim (hkim59@buffalo.edu)
-      # Date: May, 2023 	
-      # --------------------------------------------------------------------------------------------------
+      #############################################################################
+      #-------Department of Civil, Structural and Environmental Engineering-------#
+      #---------------------------University at Buffalo---------------------------#
+      # Modeling of Triple FP isolator  			  		  #
+      # Written By: Hyun-myung Kim (hkim59@buffalo.edu)			          #
+      # Date: May, 2023 							  #
+      #############################################################################
       
       # Units: N, m, sec
       # Remove existing model
