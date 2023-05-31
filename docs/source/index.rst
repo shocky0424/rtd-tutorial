@@ -134,7 +134,7 @@ Example
 
 .. admonition:: Example 
 
-   The following codes construct Example 4.6 in Du and Hajjar (2021). The libraries can be found from the OpenSeesWiki. The definition of the angle section (L3x2x0_25.tcl) is not provided here, but the mesh information is shown in the following Python code. Note that in order for clarity the mesh here is coarser than that used in Du and Hajjar (2021).
+The following code constructs Example 3 in Kim and Constantinou (2023). 
 
    1. **Tcl Code**
 
