@@ -227,7 +227,7 @@ Example
       set tagT 1; 
 
       # Define TripleFrictionPendulumX element
-      # element TripleFrictionPendulumX $eleTag $iNode $jNode $tagT $vertMatTag $rotZMatTag $rotXMatTag $rotYMatTag $tagPres $tagTemp $tagVel $mu1 $mu2 $mu3 $L1 $L2 $L3 $d1       $d2 $d3 $b1 $b2 $b3 $W $uy $kvt $minFv $tol $Pref1 $Pref2 $Pref3 $Diffu $Conduct $Temperature0 $velRate $unit $kTmodel
+      # element TripleFrictionPendulumX $eleTag $iNode $jNode $tagT $vertMatTag $rotZMatTag $rotXMatTag $rotYMatTag $tagPres $tagTemp $tagVel $mu1 $mu2 $mu3 $L1 $L2 $L3 $d1 $d2 $d3 $b1 $b2 $b3 $W $uy $kvt $minFv $tol $Pref1 $Pref2 $Pref3 $Diffu $Conduct $Temperature0 $velRate $unit $kTmodel       
       element TripleFrictionPendulumX 1 1 2  $tagT  1 2 2 2 $tagPres $tagTemp $tagVel $mu1 $mu2 $mu3 $L1 $L2 $L3 $d1 $d2 $d3 $b1 $b2 $b3 $P $uy $kvt $minFv $tol $Pref1 $Pref2 $Pref3 $Diffu $Conduct $Temperature0 $velRate 1 1;
 
       #----------------------------------------------------------------------------
