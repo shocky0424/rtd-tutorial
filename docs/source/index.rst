@@ -48,7 +48,7 @@ For more information about the element formulation, please refer to the referenc
    
    $eleTag, |integer|, "Unique element object tag"
    $iNode $jNode, |integer| |integer|, "End nodes"
-   $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis)
+   $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis)\\
    		    0 for Approach 2 (1D displacement control analysis only)"
    $vertMatTag, |float|, "Pre-defined material tag for compression behavior of the bearing"
    $rotZMatTag $rotXMatTag $rotYMatTag, |integer| |integer| |integer|, "Pre-defined material tags for rotational behavior about 3-axis, 1-axis and 2-axis, respectively."
@@ -70,17 +70,17 @@ For more information about the element formulation, please refer to the referenc
    $Temperature0, |float|, "Initial temperature (℃)"
    $rateparameter, |float|, "The exponent that determines the shape of the coefficient of friction vs. sliding velocity curve (unit: sec/m, 100sec/m is used normally)"
    $unit, |integer|, "Tag to identify the unit from the list below.
-		      1: N, m, s, ℃
-		      2: kN, m, s, ℃
-		      3: N, mm, s, ℃
-		      4: kN, mm, s, ℃
-		      5: lb, in, s, ℃
-		      6: kip, in, s, ℃
-		      7: lb, ft, s, ℃
+		      1: N, m, s, ℃\\
+		      2: kN, m, s, ℃\\
+		      3: N, mm, s, ℃\\
+		      4: kN, mm, s, ℃\\
+		      5: lb, in, s, ℃\\
+		      6: kip, in, s, ℃\\
+		      7: lb, ft, s, ℃\\
 		      8: kip, ft, s, ℃"
 $kTmodel, |integer|, "Temperature-dependent friction models (3)
-		      1: kT = 0.79·(0.70.020·T + 0.40)          (kT = 1/2 at 200℃)
-		      2: kT = 0.97·(0.70.029·T + 0.22)          (kT = 1/3 at 200℃)
+		      1: kT = 0.79·(0.70.020·T + 0.40)          (kT = 1/2 at 200℃)\\
+		      2: kT = 0.97·(0.70.029·T + 0.22)          (kT = 1/3 at 200℃)\\
 		      3: kT = 0.84·(0.70.0085·T + 0.25)         (kT = 2/3 at 200℃)"
 
 
