@@ -132,6 +132,8 @@ Subscripts of the response quantities in the following recorders refer to the nu
 Example
 #########
 
+.. admonition:: Example 
+
 **Tcl Code**
 The following code constructs Example 3 in Kim and Constantinou (2023). 
 
