@@ -94,7 +94,7 @@ For more information about the element formulation, please refer to the referenc
    
    3: :math:`k_{T}=0.84((0.7)^{0.0085T}+0.25)` (:math:`k_{T}` = 2/3 at 200℃)"
 
-.. admonition:: Recorders
+.. admonition:: Notes
 
 **Typical Element Recorders**
 
