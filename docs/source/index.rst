@@ -224,4 +224,3 @@ Example
       set systemTime [clock seconds] 
       puts "Finished Analysis: [clock format $systemTime -format "%d-%b-%Y %H:%M:%S"]"
 
-
