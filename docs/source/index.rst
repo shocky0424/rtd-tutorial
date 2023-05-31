@@ -49,26 +49,6 @@ For more information about the element formulation, please refer to the referenc
    
    $eleTag, |integer|, "Unique element object tag"
    $iNode $jNode, |integer| |integer|, "End nodes"
-   $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis), 0 for Approach 2 (1D displacement control analysis only)"
-   $vertMatTag, |float|, "Pre-defined material tag for compression behavior of the bearing"
-   $rotZMatTag $rotXMatTag $rotYMatTag, |integer| |integer| |integer|, "Pre-defined material tags for rotational behavior about 3-axis, 1-axis and 2-axis, respectively."
-   $kpFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous axial pressure. kP = 〖0.7〗^0.02(P-P_0)"  
-   $kTFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous temperature at the sliding surface"
-   $kvFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous velocity at the sliding surface. kV = 1-0.5·e^(-a·v)"
-   $Mu1 $Mu2 $Mu3, |float|, |float|, |float|, "Reference friction coefficients, \mu_i"
-   $L1 $L2 $L3, |float|, |float|, |float|, "Effective radii of cuvature. L_i = R_i – h_i"
-   $d1_star $d2_star $d3_star, |float|, |float|, |float|, "Actual displacement limits of pendulums. d_i^* = L_i/R_i·d_i, d_i = Nominal displacement capacity of each sliding interface"
-   $b1 $b2 $b3, |float|, |float|, |float|, "Diameters of the rigid slider and the two inner slide plates"
-   $W, |float|, "Axial force used for the first trial of the first analysis step"
-   $uy, |float|, "Lateral displacement where sliding of the bearing starts. Recommended value = 0.025 to 1 mm. A smaller value may cause convergence problem"
-   $kvt, |float|, "Tension stiffness kvt of the bearing"
-   $minFv (≥ 0), |float|, "Minimum vertical compression force in the bearing used for computing the horizontal tangent stiffness matrix from the normalized tangent stiffness matrix of the element" 
-   $Tol, |float|, "Relative tolerance for checking the convergence of the element. Recommended value = 1.e-10 to 1.e-3"
-   $refPressure1 $refPressure2 $refPressure3, |float|, |float|, |float|, "Reference axial pressures (the bearing pressure under static loads)"
-   $Diffusivity, |float|, "Thermal diffusivity of steel (unit: m2/sec) (= 0.444*10-5 for stainless steel)"
-   $Conductivity, |float|, "Thermal conductivity of steel (unit: W/m℃) (= 18 for stainless steel)"
-   $Temperature0, |float|, "Initial temperature (℃)"
-   $rateparameter, |float|, "The exponent that determines the shape of the coefficient of friction vs. sliding velocity curve (unit: sec/m, 100sec/m is used normally)"
    
 
 .. admonition:: Recorders
