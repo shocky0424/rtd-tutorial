@@ -70,10 +70,14 @@ For more information about the element formulation, please refer to the referenc
    $Temperature0, |float|, "Initial temperature (℃)"
    $rateparameter, |float|, "The exponent that determines the shape of the coefficient of friction vs. sliding velocity curve (unit: sec/m, 100sec/m is used normally)"
    $unit, |integer|, "Tag to identify the unit from the list. 1: N, m, s, ℃, 2: kN, m, s, ℃, 3: N, mm, s, ℃, 4: kN, mm, s, ℃, 5: lb, in, s, ℃, 6: kip, in, s, ℃, 7: lb, ft, s, ℃, 8: kip, ft, s, ℃"      
-   $kTmodel, |integer|, "Temperature-dependent friction models (3), 1: :math:`k_{T}=0.79((0.7)^{0.02T}+0.40)` (:math:`k_{T} = 1/2 at 200℃'), 2: :math:`k_{T}=0.97((0.7)^{0.029T}+0.22)` (:math:`k_{T} = 1/3 at 200℃'),3: :math:`k_{T}=0.84((0.7)^{0.0085T}+0.25)` (:math:`k_{T} = 2/3 at 200℃')"
+   $kTmodel, |integer|, "Temperature-dependent friction models (3), 1: :math:`k_{T}=0.79((0.7)^{0.02T}+0.40)` (:math:`k_{T} = 1/2 at 200℃'), 
+   2: :math:`k_{T}=0.97((0.7)^{0.029T}+0.22)` (:math:`k_{T} = 1/3 at 200℃'),
+   3: :math:`k_{T}=0.84((0.7)^{0.0085T}+0.25)` (:math:`k_{T} = 2/3 at 200℃')"
 
 
 .. admonition:: Recorders
+Recorders
+#########
 **Typical Element Recorders**
 Typical recorders for two-node element are available in the TripleFrictionPendulumX element.
 
@@ -92,8 +96,10 @@ Subscript “i” of the response quantities in the following recorders refer to
 .. csv-table:: 
    :header: "Recorder", "Description"
    :widths: 20, 40
+   
    compDisplacement, "Displacements (ui) and velocities (vi) at each sliding surface in the x and y directions (u_2x+u_3x)/2, u_1x,u_4x,  (u_2y+u_3y)/2, u_1y, u_4y, (v_2x+v_3x)/2, v_1x,v_4x,  (v_2y+v_3y)/2,v_1y,v_4y in accordance with Approach 1 (See Section 3 in Kim and Constantinou, 2022). 
 Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>compDisplacement"
+
    Parameters, "Temperatures (T2,3, T1, T4), coefficients of friction (μ2,3, μ1, μ4), Heat Fluxes (HeatFlux2,3, HeatFlux1, HeatFlux4), pressure dependency factors (kP2,3, kP1, kP4), temperature dependency factors (kT2,3, kT1, kT4), and velocity dependency factors (kv2,3, kv1, kv4).
 Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>Parameters
 "
