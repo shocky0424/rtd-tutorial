@@ -49,9 +49,7 @@ For more information about the element formulation, please refer to the referenc
    
    $eleTag, |integer|, "Unique element object tag"
    $iNode $jNode, |integer| |integer|, "End nodes"
-   $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis)
-   
-   		    0 for Approach 2 (1D displacement control analysis only)"
+   $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis), 0 for Approach 2 (1D displacement control analysis only)"
    $vertMatTag, |float|, "Pre-defined material tag for compression behavior of the bearing"
    $rotZMatTag $rotXMatTag $rotYMatTag, |integer| |integer| |integer|, "Pre-defined material tags for rotational behavior about 3-axis, 1-axis and 2-axis, respectively."
    $kpFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous axial pressure. kP = 〖0.7〗^0.02(P-P_0)"  
@@ -71,30 +69,8 @@ For more information about the element formulation, please refer to the referenc
    $Conductivity, |float|, "Thermal conductivity of steel (unit: W/m℃) (= 18 for stainless steel)"
    $Temperature0, |float|, "Initial temperature (℃)"
    $rateparameter, |float|, "The exponent that determines the shape of the coefficient of friction vs. sliding velocity curve (unit: sec/m, 100sec/m is used normally)"
-   $unit, |integer|, "Tag to identify the unit from the list below.
-		      1: N, m, s, ℃
-		      
-		      2: kN, m, s, ℃
-		      
-		      3: N, mm, s, ℃
-		      
-		      4: kN, mm, s, ℃
-		      
-		      5: lb, in, s, ℃
-		      
-		      6: kip, in, s, ℃
-		      
-		      7: lb, ft, s, ℃
-		      
-		      8: kip, ft, s, ℃"
-$kTmodel, |integer|, "Temperature-dependent friction models (3)
-		      1: :math:`k_{T}=0.79((0.7)^{0.02T}+0.40)`        \space\space  (:math:`k_{T}` = 1/2 at 200℃)
-		      
-		      2: :math:`k_{T}=0.97((0.7)^{0.029T}+0.22)`         (:math:`k_{T}` = 1/3 at 200℃)
-		      
-		      3: :math:`k_{T}=0.84((0.7)^{0.0085T}+0.25)`        (:math:`k_{T}` = 2/3 at 200℃)
-
-
+   $unit, |integer|, "Tag to identify the unit from the list. 1: N, m, s, ℃, 2: kN, m, s, ℃, 3: N, mm, s, ℃, 4: kN, mm, s, ℃, 5: lb, in, s, ℃, 6: kip, in, s, ℃, 7: lb, ft, s, ℃, 8: kip, ft, s, ℃"      
+   $kTmodel, |integer|, "Temperature-dependent friction models (3), 1: :math:`k_{T}=0.79((0.7)^{0.02T}+0.40)` (:math:`k_{T} = 1/2 at 200℃'), 2: :math:`k_{T}=0.97((0.7)^{0.029T}+0.22)` (:math:`k_{T} = 1/3 at 200℃'),3: :math:`k_{T}=0.84((0.7)^{0.0085T}+0.25)` (:math:`k_{T} = 2/3 at 200℃')"
 
 
 Recorders
