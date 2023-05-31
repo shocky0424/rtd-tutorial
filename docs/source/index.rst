@@ -49,7 +49,14 @@ For more information about the element formulation, please refer to the referenc
    
    $eleTag, |integer|, "Unique element object tag"
    $iNode $jNode, |integer| |integer|, "End nodes"
-   
+   $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis), 0 for Approach 2 (1D displacement control analysis only)"
+   $vertMatTag, |float|, "Pre-defined material tag for compression behavior of the bearing"
+   $rotZMatTag $rotXMatTag $rotYMatTag, |integer| |integer| |integer|, "Pre-defined material tags for rotational behavior about 3-axis, 1-axis and 2-axis, respectively."
+   $kpFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous axial pressure. kP = 〖0.7〗^0.02(P-P_0)"  
+   $kTFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous temperature at the sliding surface"
+   $kvFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous velocity at the sliding surface. kV = 1-0.5·e^(-a·v)"
+   $Mu1 $Mu2 $Mu3, |float|, |float|, |float|, "Reference friction coefficients, \mu_i"
+   $L1 $L2 $L3, |float|, |float|, |float|, "Effective radii of cuvature. L_i = R_i – h_i"
 
 .. admonition:: Recorders
 Recorders
