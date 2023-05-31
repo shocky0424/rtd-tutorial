@@ -15,75 +15,315 @@ k_{p}=(0.7)^{0.02(p-p_{0})}
 k_{v}=(1-0.5e^{-ɑv})
 k_{T}=0.79∙((0.7)^{0.02T}+0.40)
 
+In the TripleFrictionPendulumX element, the temperature-dependency of the coefficient of friction was expanded to account for additional cases (Kim and Constantinou, 2023b) beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
 
-.. figure:: RockingBC.png
+.. math::
+k_{T}=0.84∙((0.7)^{0.0085T}+0.25)
+k_{T}=0.97∙((0.7)^{0.029T}+0.22)
+
+
+.. figure:: FIGURE 1.tif
    :align: center
    :figclass: align-center
    :width: 700
 
-   RockingBC element
+   Friction Coefficient-Temperature Relationships in TripleFrictionPendulumX element
 
+For more information about the element formulation, please refer to the references at the end of this page.
+
+.. figure:: FIGURE 2.tif
+   :align: center
+   :figclass: align-center
+   :width: 700
+
+   Geometry of Triple FP bearing in accordance with OpenSees Commands
+   
 .. admonition:: Command
 
-   **element RockingBC $eleTag $iNode $jNode $Nw $E $nu $sy $B $w $mu <-convlim $convlim> <-useshear $useshear> <-blevery $blevery> <-useUelNM $useUelNM> <-usecomstiff $usecomstiff> <-af $af> <-aflim $aflim> <-convlimmult $convlimmult> <-maxtries $maxtries> <-NlimN $NlimN> <-NlimT $NlimT> <-Dtlim $Dtlim> <-errorifNexceeds $errorifNexceeds>**
+   **element TripleFrictionPendulumX $eleTag $iNode $jNode $Tag $vertMatTag $rotZMatTag $rotXMatTag $rotYMatTag $kpFactor $kTFactor $kvFactor $Mu1 $Mu2 $Mu3 $L1 $L2 $L3 $d1_star $d2_star $d3_star $b1 $b2 $b3 $W $uy $kvt $minFv $Tol $refPressure1 $refPressure2 $refPressure3 $Diffusivity $Conductivity $Temperature0 $rateParameter $unit $kTmodels**
 
 .. csv-table:: 
    :header: "Argument", "Type", "Description"
    :widths: 5, 5, 40
    
-   $eleTag, |integer|, "unique element object tag"
-   $iNode, |integer|, "the node of the element with conventional behavior, fixed with the other member"
-   $jNode, |integer|, "the node of the element corresponding to the rocking end (Note that the dofs of this node correspond to the motion of the rocking base and not to the end of the rocking member)"
-   $Nw, |integer|, "number of control points used for the discretization of the rocking interface"
-   $E, |float|, "modulus of elasticity"
-   $nu, |float|, "Poisson ratio"
-   $sy, |float|, "yield stress (must be negative): An elastic - perfectly plastic material behavior is adopted for the rocking interface, where the inelastic deformations are considered irreversible"
-   $B, |float|, "member width"
-   $w, |float|, "member thickness"
-   $mu, |float|, "friction coefficient at the rocking interface: If the value 0 is used, there is no sliding and the relative displacement of the body with respect to the rocking base is due to upthrow only."
-   $convlim, |float|, "convergence limit for the norm of the difference of the control point displacements from the target ones at the rocking end of the member (*default value=1.0e-14*)"
-   $useshear, |integer|, "If nonzero, the contribution of the partial loading of the shear stresses is taken into account. As explained in the relevant reference [4], this option creates problems when used in dynamic analyses (*default value=0*)"
-   $blevery, |integer|, "Number of steps after which a bilinearization of the stress and plastic displacement distributions across the rocking interface is performed. This greatly accelerates dynamic analyses, which involve many steps. When 0, no bilinearization is performed. (*default value=1*)"
-   $useUelNM, |integer|, "If the value 0 is used, the contribution of the partial loading of the rocking interface is calculated using the exact stress distributions. This, however, is computationally inefficient and does not allow the aforementioned distribution bilinearization. Else, the integrals of the stress distribution at each rocking interface interval are used instead, which produces practically indistinguishable results. (*default value=1*)"
-   $usecomstiff, |integer|, "If the value 0 is used, the initial trial solution of each step is determined from the previous stiffness and previous trial solution, even if convergence failed previously. If -1, the inital trial solution is the same as the last committed solution. Else, the initial trial solution is determined from the committed stiffness and committed solution. (*default value=0*)"
-   $af $aflim $convlimmult $maxtries, |float| |float| |float| |integer|, "variables controlling convergence tries - see Note 2 below (*corresponding default values=1.0, 0.4, 1.0, 100*)"
-   $NlimN $NlimT $Dtlim $errorifNexceeds, |float| |float| |float| |integer|, "variables controlling the rate of change of the member axial force, applicable when performing a dynamic analysis and especially useful when impacts are expected - see Note 3 below (*corresponding default values=0.1, 10.0, 1.0e-8, 0*)"
+   $eleTag, |integer|, "Unique element object tag"
+   $iNode $jNode, |integer| |integer|, "End nodes"
+   $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis)
+   		    0 for Approach 2 (1D displacement control analysis only)"
+   $vertMatTag, |float|, "Pre-defined material tag for compression behavior of the bearing"
+   $rotZMatTag $rotXMatTag $rotYMatTag, |integer| |integer| |integer|, "Pre-defined material tags for rotational behavior about 3-axis, 1-axis and 2-axis, respectively."
+   $kpFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous axial pressure. kP = 〖0.7〗^0.02(P-P_0)"  
+   $kTFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous temperature at the sliding surface"
+   $kvFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous velocity at the sliding surface. kV = 1-0.5·e^(-a·v)"
+   $Mu1 $Mu2 $Mu3, |float|, |float|, |float|, "Reference friction coefficients, \mu_i"
+   $L1 $L2 $L3, |float|, |float|, |float|, "Effective radii of cuvature. L_i = R_i – h_i"
+   $d1_star $d2_star $d3_star, |float|, |float|, |float|, "Actual displacement limits of pendulums. d_i^* = L_i/R_i·d_i, d_i = Nominal displacement capacity of each sliding interface"
+   $b1 $b2 $b3, |float|, |float|, |float|, "Diameters of the rigid slider and the two inner slide plates"
+   $W, |float|, "Axial force used for the first trial of the first analysis step"
+   $uy, |float|, "Lateral displacement where sliding of the bearing starts. Recommended value = 0.025 to 1 mm. A smaller value may cause convergence problem"
+   $kvt, |float|, "Tension stiffness kvt of the bearing"
+   $minFv (≥ 0), |float|, "Minimum vertical compression force in the bearing used for computing the horizontal tangent stiffness matrix from the normalized tangent stiffness matrix of the element" 
+   $Tol, |float|, "Relative tolerance for checking the convergence of the element. Recommended value = 1.e-10 to 1.e-3"
+   $refPressure1 $refPressure2 $refPressure3, |float|, |float|, |float|, "Reference axial pressures (the bearing pressure under static loads)"
+   $Diffusivity, |float|, "Thermal diffusivity of steel (unit: m2/sec) (= 0.444*10-5 for stainless steel)"
+   $Conductivity, |float|, "Thermal conductivity of steel (unit: W/m℃) (= 18 for stainless steel)"
+   $Temperature0, |float|, "Initial temperature (℃)"
+   $rateparameter, |float|, "The exponent that determines the shape of the coefficient of friction vs. sliding velocity curve (unit: sec/m, 100sec/m is used normally)"
+   $unit, |integer|, "Tag to identify the unit from the list below.
+		      1: N, m, s, ℃
+		      2: kN, m, s, ℃
+		      3: N, mm, s, ℃
+		      4: kN, mm, s, ℃
+		      5: lb, in, s, ℃
+		      6: kip, in, s, ℃
+		      7: lb, ft, s, ℃
+		      8: kip, ft, s, ℃"
+$kTmodel, |integer|, "Temperature-dependent friction models (3)
+		      1: kT = 0.79·(0.70.020·T + 0.40)          (kT = 1/2 at 200℃)
+		      2: kT = 0.97·(0.70.029·T + 0.22)          (kT = 1/3 at 200℃)
+		      3: kT = 0.84·(0.70.0085·T + 0.25)         (kT = 2/3 at 200℃)"
 
-.. admonition:: Notes
 
-   #. For dynamic analyses, the element uses a damping formulation similar to the current-stiffness-proportional damping. For this reason, only the $betaKcurr value defined in Rayleigh damping is taken into account by the element.
-   
-   #. The rocking motion is highly nonlinear and as such, convergence problems sometimes occur during state determination. In order to overcome such problems, in the current version of the element, the following variables and strategies are used: During convergence iterations, the trial vector of stresses/displacements at the control points **W** is incremented $af times the usual increment calculated using the derivatives and one may set $af lower than 1.0 to achieve better convergence, with the cost of slower convergence. However, since $af=1.0 is the usually the optimum value, this value is suggested and $af is lowered automatically as explained next. The maximum number of tries allowed for each convergence stage is set to $maxtries/$af^3, during which the norm of the difference of the control point displacements at the rocking interface from the target ones must become lower than $convlim. If such convergence is not possible the first time, $af is halved and the convergence limit is set to $convlimmult*$convlim and convergence is tested again. The second time, the same $af and convergence limit are used, but the initial trial vector **W** is set to zero. If convergence is again not possible, $af is subsequently halved and the convergence limit is constantly multiplied with $convlimmult, until $af becomes lower than $aflim, when an error is thrown.
-   
-   #. In order for the element to produce accurate results in dynamic problems involving impacts, the rate of change of the axial force of the element must be controlled, so that it does not exceed a predefined limit each step. This allows for a more accurate calculation of the damping forces, which are very large in case of impacts. If variable $errorifNexceeds is set to a nonzero value, the element throws an error to the general finite element framework if such exceedance occurs. The last value of the member axial force before the dynamic analysis is stored, which is used to calculate the ratio of the increment in the deformation-inducing axial force with respect to the last static axial force and the ratio of the increment in the total (deformation-inducing & damping) axial force with respect to the last static axial force. These values should not exceed $NlimN and $NlimT, respectively, or an error is thrown, so that the algorithm which calls the dynamic analysis may lower the timestep. If the current timestep used is lower than $Dtlim, an error is not thrown, which may be used when a further timestep reduction is considered impossible without causing numerical problems.
-   
-   #. The following recorders can be used with the element:
-   
-   .. csv-table:: 
-      :header: "Recorder", "Description"
-      :widths: 5, 40
-      
-      force or globalForce, global forces
-      localForce, local forces
-      basicForce, basic (corotational system) forces
-      localDisplacements, local system displacements
-      sL or slip, relative slip between the rocking body end and the rocking interface
-      forceratioNmax, maximum ratio of the increment in the deformation-inducing axial force in a dynamic analysis with respect to the last value of the axial force before the dynamic analysis
-      forceratioTmax, maximum ratio of the increment in the total (deformation-inducing & damping) axial force in a dynamic analysis with respect to the last value of the axial force before the dynamic analysis
-      *other* (arbitrary), "This option is used when the stress and plastic displacement distributions across the rocking interface are required at each step. The former are recorded in files *other_Ys* (coordinates) and *other_S* (stress values), while the latter in files *other_Yup* (coordinates) and *other_Up* (plastic displacement values)."
+Recorders
+#########
+**Typical Element Recorders**
+Typical recorders for two-node element are available in the TripleFrictionPendulumX element.
+
+.. csv-table:: 
+   :header: "Recorder", "Description"
+   :widths: 20, 40
+   globalForce, global forces
+   localForce, local forces
+   basicForce, basic forces
+   basicDisplacement, basic displacements
+
+**TripleFrictionPendulumX Element Recorders**
+Subscript “i” of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
+
+.. csv-table:: 
+   :header: "Recorder", "Description"
+   :widths: 20, 40
+   compDisplacement, "Displacements (ui) and velocities (vi) at each sliding surface in the x and y directions (u_2x+u_3x)/2, u_1x,u_4x,  (u_2y+u_3y)/2, u_1y, u_4y, (v_2x+v_3x)/2, v_1x,v_4x,  (v_2y+v_3y)/2,v_1y,v_4y in accordance with Approach 1 (See Section 3 in Kim and Constantinou, 2022). 
+Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>compDisplacement"
+   Parameters, "Temperatures (T2,3, T1, T4), coefficients of friction (μ2,3, μ1, μ4), Heat Fluxes (HeatFlux2,3, HeatFlux1, HeatFlux4), pressure dependency factors (kP2,3, kP1, kP4), temperature dependency factors (kT2,3, kT1, kT4), and velocity dependency factors (kv2,3, kv1, kv4).
+Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>Parameters
+"
 
 .. admonition:: Example
+**Tcl Code**
+The following codes construct Example 3 in Kim and Constantinou (2023). 
 
-	An example file can be located at https://github.com/OpenSees/OpenSees/tree/master/EXAMPLES/ExampleScripts/RockingBC.tcl
+.. code-block:: tcl
+#############################################################################
+#-------Department of Civil, Structural and Environmental Engineering-------#
+#---------------------------University at Buffalo---------------------------#
+#Modeling of Triple FP isolator  			  					   			#
+#Written By: Hyun-myung Kim (hkim59@buffalo.edu)							#
+#Date: May, 2023 															#
+#############################################################################
+
+#Units: N, m, sec
+#Remove existing model
+wipe
+
+# EXAMPLE 3 (Kim and Constantinou 2023 https://doi.org/10.1002/eqe.3797)
+#----------------------------------------------------------------------------
+# User Defined Parameters
+#----------------------------------------------------------------------------
+
+# TFP Geomoetry of Configuration A 
+set L1 0.3937;			# Effective radii of curvature (m)
+set L2 3.7465;
+set L3 3.7465;
+set d1 0.0716;			# Actual displacement capacity (m)
+set d2 0.5043;
+set d3 0.5043;
+set b1 [expr 0.508];  	# Diameter of contact area at the sliding surface (m) 
+set b2 [expr 0.711];  
+set b3 [expr 0.711];  
+set r1 [expr $b1/2];  	# Radius of contact area at the sliding surface (m) 
+set r2 [expr $b2/2];  
+set r3 [expr $b3/2];  
+
+set uy 0.001; 			# Yield displacement (m)   
+set kvc 8000000000.; 	# vertical compression stiffness (N/m)
+set kvt 1.; 			# vertical tension stiffness (N/m)
+set minFv 0.1; 			# minimum compression force in the bearing (N)
+
+set g 	9.81; 			# gravity acceleration (m/s^2)
+set P 	13345e+03; 		# Load on top of TFP 
+set Mass [expr $P/$g];  # Mass on top of TFP 
+set tol 1.e-5; 			# Relative tolerance for checking convergence
+
+# Heat parameters
+set Diffu 0.444e-5;		# Thermal diffusivity (m^2/sec)
+set Conduct 18; 		# Thermal conductivity (W/m*Celsius)
+set Temperature0 20; 	# Initial temperature (Celsius)
+
+# Friction coefficients (reference)
+set mu1 0.01; 
+set mu2 0.04;
+set mu3 0.08;
+
+# Reference Pressure
+set Pref1 [expr $P/($r1*$r1*3.141592)];
+set Pref2 [expr $P/($r2*$r2*3.141592)];
+set Pref3 [expr $P/($r3*$r3*3.141592)];
+
+#----------------------------------------------------------------------------
+# Start of model generation
+#----------------------------------------------------------------------------
+
+#Create Model Builder
+model basic -ndm 3 -ndf 6
+
+# Create nodes
+node 1 0 0 0; # End i
+node 2 0 0 0; # End j
+
+# Define single point constraints 
+fix 1 	1 1 1 1 1 1;
+
+# Define friction models
+set tagTemp 1;
+set tagVel 0;
+set tagPres 0;
+set velRate 100;
+
+#----------------------------------------------------------------------------
+# Bring material models and define element
+#----------------------------------------------------------------------------
+
+# Creating material for compression and rotation behaviors
+uniaxialMaterial Elastic 1 $kvc;
+uniaxialMaterial Elastic 2 10.;
+
+set tagT 1; 
+
+# Define TripleFrictionPendulumX element
+# element TripleFrictionPendulumX $eleTag $iNode $jNode $tagT $vertMatTag $rotZMatTag $rotXMatTag $rotYMatTag $tagPres $tagTemp $tagVel $mu1 $mu2 $mu3 $L1 $L2 $L3 $d1 $d2 $d3 $b1 $b2 $b3 $W $uy $kvt $minFv $tol $Pref1 $Pref2 $Pref3 $Diffu $Conduct $Temperature0 $velRate $unit $kTmodel
+element TripleFrictionPendulumX 1 1 2  $tagT  1 2 2 2 $tagPres $tagTemp $tagVel $mu1 $mu2 $mu3 $L1 $L2 $L3 $d1 $d2 $d3 $b1 $b2 $b3 $P $uy $kvt $minFv $tol $Pref1 $Pref2 $Pref3 $Diffu $Conduct $Temperature0 $velRate 1 1;
+
+#----------------------------------------------------------------------------
+# Apply gravity load
+#----------------------------------------------------------------------------
+
+#Create a plain load pattern with linear timeseries
+pattern Plain 1 "Linear" {
+	
+	load 2 0. 0. -[expr $P] 0.0 0.0 0.0
+}
+
+#----------------------------------------------------------------------------
+# Start of analysis generation (Gravity)
+#----------------------------------------------------------------------------
+
+system BandSPD
+constraints Transformation
+numberer RCM
+test NormDispIncr 1.0e-15 10 3
+algorithm Newton
+integrator LoadControl 1
+analysis Static
+
+#----------------------------------------------------------------------------
+# Analysis (Gravity)
+#----------------------------------------------------------------------------
+
+analyze 1
+puts "Gravity analysis completed SUCCESSFULLY";
+
+#----------------------------------------------------------------------------
+# Start of analysis generation 
+# (Sinusoidal; Two cycles of 5s period and 508mm amplitude)
+#----------------------------------------------------------------------------
+
+loadConst -time 0.0
+
+#analysis time step 
+set dt [expr 0.008]
+
+#excitation time step
+set dt1 [expr 0.001] 
+
+timeSeries Trig 11 $dt 10 5 -factor 0.508 -shift 0
+
+pattern MultiSupport 2 {
+groundMotion 1 Plain -disp 11 
+# Node, direction, GMtag
+imposedMotion 2 2 1
+}
+
+#----------------------------------------------------------------------------
+# Start of recorder generation (Sinusoidal)
+#----------------------------------------------------------------------------
+
+# Set up recorder
+set OutDir 		EXAMPLE3;			# Output folder
+set OutFile1	TEMPERATURE.txt;
+set OutFile2 	DISP.txt; 		  
+set OutFile3	FORCE.txt;
+set OutFile4	COMPDISP.txt;
+
+file mkdir $OutDir;
+recorder Element -file $OutDir/$OutFile1 -time -ele 1 Parameters;
+recorder Node -file $OutDir/$OutFile2 -time -nodes 2 -dof 1 2 3 disp;
+recorder Element -file $OutDir/$OutFile3 -time -ele 1 basicForce;
+recorder Element -file $OutDir/$OutFile4 -time -ele 1 compDisplacement;
+
+#----------------------------------------------------------------------------
+# Analysis (Sinusoidal)
+#----------------------------------------------------------------------------
+
+system SparseGeneral
+constraints Transformation
+test NormDispIncr 1.0e-5 20 0
+algorithm Newton
+numberer Plain
+integrator Newmark 0.5 0.25
+analysis Transient
+
+# set some variables
+set tFinal [expr 10]
+set tCurrent [getTime]
+set ok 0
+
+# Perform the transient analysis
+while {$ok == 0 && $tCurrent < $tFinal} {
+    
+    set ok [analyze 1 $dt]
+    
+    # if the analysis fails try initial tangent iteration
+    if {$ok != 0} {
+	puts "regular newton failed .. lets try an initail stiffness for this step"
+	test NormDispIncr 1.0e-12  100 0
+	algorithm ModifiedNewton -initial
+	set ok [analyze 1 $dt]
+	if {$ok == 0} {puts "that worked .. back to regular newton"}
+	test NormDispIncr 1.0e-12  10 
+	algorithm Newton
+    }
+    
+    set tCurrent [getTime]
+}
+
+# Print a message to indicate if analysis succesfull or not
+if {$ok == 0} {
+   puts "Transient analysis completed SUCCESSFULLY";
+} else {
+   puts "Transient analysis completed FAILED";    
+}
 
 .. admonition:: References 
 
-   #. Avgenakis E. and Psycharis I.N. (2017) “Modeling of Rocking Elastic Flexible Bodies under Static Loading Considering the Nonlinear Stress Distribution at Their Base.” Journal of Structural Engineering 143(7): 04017051.
+   #. Dao, N. D., Ryan, K. L., Sato, E. and Sasaki, T. (2013). “Predicting the displacement of triple pendulum bearings in a full-scale shaking experiment using a three-dimensional element”, Earthquake engineering and structural dynamics, 42(11), 1677-1695. doi.org/10.1002/eqe.2293
 	
-   #. Avgenakis E. and Psycharis I.N. (2019) “Determination of the nonlinear displacement distribution of the semi-infinite strip–Application to deformable rocking bodies.” International Journal of Solids and Structures, 170, 22-37.
+   #. Kim, H-M., and Constantinou, M. C. (2022). “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
 	
-   #. Avgenakis E. and Psycharis I.N. (2020) “Modeling of inelastic rocking bodies under cyclic loading.” Journal of Engineering Mechanics 146(4): 04020020.
+   #. Kim, H-M., and Constantinou, M. C. (2023a). “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics. doi.org/10.1002/eqe.3797
 	
-   #. Avgenakis E. and Psycharis I.N. (2020) “An integrated macroelement formulation for the dynamic response of inelastic deformable rocking bodies.” Earthquake Engineering and Structural Dynamics, 49(11), 1072-1094.
-
-Code Developed by: **Evangelos Avgenakis** and **Ioannis N. Psycharis**, School of Civil Engineering, National Technical University of Athens, Greece
+   #. Kim, H-M., and Constantinou, M. C. (2023b). “Development of Performance-based Testing Specifications for Seismic Isolators”, Report No. MCEER-23-xxxx, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
+   
+   #. Kumar, M., Whittaker, A. S., and Constantinou, M. C. (2015). “Characterizing friction in sliding isolation bearings”, Earthquake Engineering & Structural Dynamics, 44(9), 1409-1425. doi.org/10.1002/eqe.2524
+   
+Code Developed by: **Hyun-myung Kim** and **Michael C. Constantinou**, University at Buffalo, NY
