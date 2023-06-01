@@ -357,7 +357,7 @@ For more information about the element formulation, please refer to the referenc
    :figclass: align-center
    :width: 700
 
-   Figure 5. emperature histories at sliding surfaces in Example 3
+   Figure 5. Temperature histories at sliding surfaces in Example 3
 
    
 .. admonition:: Reference
