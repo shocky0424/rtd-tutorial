@@ -2,11 +2,11 @@
 TripleFrictionPendulumX Element
 ^^^^^^^^^^^^^^^^
 
-This command is used to construct a TripleFrictionPendulumX element (Kim and Constantinou, 2022,2023a) object, which is an extension of a TripleFrictionPendulum element (Dao et al., 2013). 
+This command is used to construct a TripleFrictionPendulumX element [KimConstantinou2022]_ [KimConstantinou2023a]_ object, which is an extension of a TripleFrictionPendulum element [DaoEtAl2013]_. 
 
 The horizontal behavior of the element is achieved by the series model, which consists of properly combined hysteretic/frictional and multidirectional gap elements. 
 
-Two main modifications in the TripleFrictionPendulumX element include that 1) displacement and velocity of the top of the bearing with respect to its bottom computed by the element are partitioned into components at each sliding surface and 2) the factorized friction model used in OpenSees element FPBearingPTV (Kumar et al., 2015) is implemented to account for the effects of pressure, velocity and frictional heating on the friction coefficients at each sliding surfaces calculated by means of the partitioned displacement and velocity. The friction coefficient is given by equation (1) to (4) in which μref is the reference high speed coefficient of friction at the initial time :math:`t = 0`, initial temperature :math:`T_{0} = 20℃` and initial pressure :math:`p_{0}`, :math:`a` is velocity rate parameter :math:`(= 100s/m)`, :math:`p` is the apparent pressure, and :math:`v` is the amplitude of the velocity.
+Two main modifications in the TripleFrictionPendulumX element include that 1) displacement and velocity of the top of the bearing with respect to its bottom computed by the element are partitioned into components at each sliding surface and 2) the factorized friction model used in OpenSees element FPBearingPTV [KumarEtAl2015]_ is implemented to account for the effects of pressure, velocity and frictional heating on the friction coefficients at each sliding surfaces calculated by means of the partitioned displacement and velocity. The friction coefficient is given by equation (1) to (4) in which μref is the reference high speed coefficient of friction at the initial time :math:`t = 0`, initial temperature :math:`T_{0} = 20℃` and initial pressure :math:`p_{0}`, :math:`a` is velocity rate parameter :math:`(= 100s/m)`, :math:`p` is the apparent pressure, and :math:`v` is the amplitude of the velocity.
 
 .. math::
   
@@ -18,7 +18,7 @@ Two main modifications in the TripleFrictionPendulumX element include that 1) di
   
       k_{T}=0.79((0.7)^{0.02T}+0.40) 　　　　　　(4)
 
-In the TripleFrictionPendulumX element, the temperature-dependency of the coefficient of friction was expanded to account for additional cases (Kim and Constantinou, 2023b) beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
+In the TripleFrictionPendulumX element, the temperature-dependency of the coefficient of friction was expanded to account for additional cases [KimConstantinou2023b]_ beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
 
 .. math::
 
@@ -32,7 +32,7 @@ In the TripleFrictionPendulumX element, the temperature-dependency of the coeffi
    :figclass: align-center
    :width: 700
 
-   Friction Coefficient-Temperature Relationships in TripleFrictionPendulumX element
+   Figure 1. Friction Coefficient-Temperature Relationships in TripleFrictionPendulumX element
 
 For more information about the element formulation, please refer to the references at the end of this page.
 
@@ -41,7 +41,7 @@ For more information about the element formulation, please refer to the referenc
    :figclass: align-center
    :width: 700
 
-   Geometry of Triple FP bearing in accordance with OpenSees Commands
+   Figure 2. Geometry of Triple FP bearing in accordance with OpenSees Commands
   
 .. admonition:: Command
 
@@ -131,7 +131,7 @@ Subscripts of the response quantities in the following recorders refer to the nu
 
 .. admonition:: Example 
 
-   The following code constructs Example 3 in Kim and Constantinou (2023). 
+   The following code constructs Example 3 in [KimConstantinou2023a]. 
 
    1. **Tcl Code**
 
@@ -149,7 +149,7 @@ Subscripts of the response quantities in the following recorders refer to the nu
       # Remove existing model
       wipe
 
-      # EXAMPLE 3 (Kim and Constantinou 2023 https://doi.org/10.1002/eqe.3797)
+      # EXAMPLE 3 (Kim and Constantinou, 2023 https://doi.org/10.1002/eqe.3797)
       #----------------------------------------------------------------------------
       # User Defined Parameters
       #----------------------------------------------------------------------------
@@ -339,14 +339,14 @@ Subscripts of the response quantities in the following recorders refer to the nu
       
 .. admonition:: References 
 
-   #. Dao, N. D., Ryan, K. L., Sato, E. and Sasaki, T. (2013). “Predicting the displacement of triple pendulum bearings in a full-scale shaking experiment using a three-dimensional element”, Earthquake engineering and structural dynamics, 42(11), 1677-1695. doi.org/10.1002/eqe.2293.
-	
-   #. Kim, H-M., and Constantinou, M. C. (2022). “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
-	
-   #. Kim, H-M., and Constantinou, M. C. (2023a). “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics. doi.org/10.1002/eqe.3797.
-	
-   #. Kim, H-M., and Constantinou, M. C. (2023b). “Development of Performance-based Testing Specifications for Seismic Isolators”, Report No. MCEER-23-xxxx, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
-   
-   #. Kumar, M., Whittaker, A. S., and Constantinou, M. C. (2015). “Characterizing friction in sliding isolation bearings”, Earthquake Engineering & Structural Dynamics, 44(9), 1409-1425. doi.org/10.1002/eqe.2524.
+.. [DaoEtAl2013] Dao, N. D., Ryan, K. L., Sato, E. and Sasaki, T. (2013). “Predicting the displacement of triple pendulum bearings in a full-scale shaking experiment using a three-dimensional element”, Earthquake engineering and structural dynamics, 42(11), 1677-1695. https://doi.org/10.1002/eqe.2293.
 
-Code Developed by: **Hyun-myung Kim** and **Michael C. Constantinou**, University at Buffalo, NY, USA
+.. [KimConstantinou2022] “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY. https://www.buffalo.edu/mceer/catalog.host.html/content/shared/www/mceer/publications/MCEER-22-0001.detail.html
+
+.. [KimConstantinou2023a] “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics, 52(4), 979–997. https://doi.org/10.1002/eqe.3797.
+
+.. [KimConstantinou2023b] “Development of Performance-based Testing Specifications for Seismic Isolators”, Report No. MCEER-23-xxxx, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
+
+.. [KumarEtAl2015] “Characterizing friction in sliding isolation bearings”, Earthquake Engineering & Structural Dynamics, 44(9), 1409-1425. https://doi.org/10.1002/eqe.2524.
+
+Code Developed by: **Hyun-myung Kim** and **Michael C. Constantinou**, University at Buffalo
