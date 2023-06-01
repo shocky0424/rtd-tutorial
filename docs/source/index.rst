@@ -16,7 +16,7 @@ Two main modifications in the TripleFrictionPendulumX element include that 1) di
   
       k_{T}=0.79((0.7)^{0.02T}+0.40) 　　　　　　(4)
 
-In the TripleFrictionPendulumX element, the temperature-dependency of the coefficient of friction was expanded to account for additional cases [KimConstantinou2023b]_ beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
+In the TripleFrictionPendulumX element, the temperature-dependency of the friction coefficient was expanded to account for additional cases [KimConstantinou2023b]_ beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
 
 .. math::
 
