@@ -8,6 +8,8 @@ The horizontal behavior of the element is achieved by the series model, which co
 
 Two main modifications in the TripleFrictionPendulumX element include that 1) displacement and velocity of the top of the bearing with respect to its bottom computed by the element are partitioned into components at each sliding surface and 2) the factorized friction model used in OpenSees element FPBearingPTV (Kumar et al., 2015) is implemented to account for the effects of pressure, velocity and frictional heating on the friction coefficients at each sliding surfaces calculated by means of the partitioned displacement and velocity. The friction coefficient is given by equation (1) to (4) in which μref is the reference high speed coefficient of friction at the initial time :math:`t = 0`, initial temperature :math:`T_{0} = 20℃` and initial pressure :math:`p_{0}`, :math:`a` is velocity rate parameter :math:`(= 100s/m)`, :math:`p` is the apparent pressure, and :math:`v` is the amplitude of the velocity.
 
+.. class:: center
+
 :math:`\mu(p,v,T)=\mu_{ref} k_{p} k_{v} k_{T}`
 
 :math:`k_{p}=(0.7)^{0.02(p-p_{0})}` 
