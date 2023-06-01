@@ -342,7 +342,7 @@ For more information about the element formulation, please refer to the referenc
 
    .. [DaoEtAl2013] Dao, N. D., Ryan, K. L., Sato, E. and Sasaki, T. (2013). “Predicting the displacement of triple pendulum bearings in a full-scale shaking experiment using a three-dimensional element”, Earthquake engineering and structural dynamics, 42(11), 1677-1695. https://doi.org/10.1002/eqe.2293.
 
-   .. [KimConstantinou2022] “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY. https://www.buffalo.edu/mceer/catalog.host.html/content/shared/www/mceer/publications/MCEER-22-0001.detail.html
+   .. [KimConstantinou2022] “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY. 
 
    .. [KimConstantinou2023a] “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics, 52(4), 979–997. https://doi.org/10.1002/eqe.3797.
 
