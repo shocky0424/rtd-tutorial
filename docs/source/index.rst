@@ -10,13 +10,13 @@ Two main modifications in the TripleFrictionPendulumX element include that 1) di
 
 .. math::
   
-      \mu(p,v,T)=\mu_{ref} k_{p} k_{v} k_{T} 　　　　　(1)
+      \mu(p,v,T)=\mu_{ref} k_{p} k_{v} k_{T} 　　　　　　(1)
   
-      k_{p}=(0.7)^{0.02(p-p_{0})} 　　　　　(2)
+      k_{p}=(0.7)^{0.02(p-p_{0})} 　　　　　　(2)
 
-      k_{v}=(1-0.5e^{-av}) 　　　　　(3)
+      k_{v}=(1-0.5e^{-av}) 　　　　　　(3)
   
-      k_{T}=0.79((0.7)^{0.02T}+0.40) 　　　　　(4)
+      k_{T}=0.79((0.7)^{0.02T}+0.40) 　　　　　　(4)
 
 In the TripleFrictionPendulumX element, the temperature-dependency of the coefficient of friction was expanded to account for additional cases (Kim and Constantinou, 2023b) beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
 
