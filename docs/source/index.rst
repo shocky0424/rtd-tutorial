@@ -337,6 +337,28 @@ For more information about the element formulation, please refer to the referenc
          puts "Transient analysis completed FAILED";    
       }
 
+
+.. figure:: FIGURE3.jpg
+   :align: center
+   :figclass: align-center
+   :width: 700
+
+   Figure 3. Force-displacement loop in Example 3
+
+.. figure:: FIGURE4.jpg
+   :align: center
+   :figclass: align-center
+   :width: 700
+
+   Figure 4. Displacement histories at sliding surfaces in Example 3
+   
+.. figure:: FIGURE5.jpg
+   :align: center
+   :figclass: align-center
+   :width: 700
+
+   Figure 5. emperature histories at sliding surfaces in Example 3
+
    
 .. admonition:: Reference
 
