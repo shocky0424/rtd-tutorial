@@ -104,7 +104,7 @@ For more information about the element formulation, please refer to the referenc
 
                Typical recorders for two-node element are available in the TripleFrictionPendulumX element.
 
-               .. csv-table:: 
+         .. csv-table:: 
                :header: "Recorder", "Description"
                :widths: 20, 40
    
@@ -117,7 +117,7 @@ For more information about the element formulation, please refer to the referenc
 
                Subscripts of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
 
-               .. csv-table:: 
+         .. csv-table:: 
                :header: "Recorder", "Description"
                :widths: 20, 40
    
@@ -336,7 +336,8 @@ For more information about the element formulation, please refer to the referenc
       } else {
          puts "Transient analysis completed FAILED";    
       }
-      
+     
+     
 .. [DaoEtAl2013] Dao, N. D., Ryan, K. L., Sato, E. and Sasaki, T. (2013). “Predicting the displacement of triple pendulum bearings in a full-scale shaking experiment using a three-dimensional element”, Earthquake engineering and structural dynamics, 42(11), 1677-1695. https://doi.org/10.1002/eqe.2293.
 
 .. [KimConstantinou2022] “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY. https://www.buffalo.edu/mceer/catalog.host.html/content/shared/www/mceer/publications/MCEER-22-0001.detail.html
@@ -346,5 +347,6 @@ For more information about the element formulation, please refer to the referenc
 .. [KimConstantinou2023b] “Development of Performance-based Testing Specifications for Seismic Isolators”, Report No. MCEER-23-xxxx, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
 
 .. [KumarEtAl2015] “Characterizing friction in sliding isolation bearings”, Earthquake Engineering & Structural Dynamics, 44(9), 1409-1425. https://doi.org/10.1002/eqe.2524.
+
 
 Code Developed by: **Hyun-myung Kim** and **Michael C. Constantinou**, University at Buffalo
