@@ -27,7 +27,7 @@ In the TripleFrictionPendulumX element, the temperature-dependency of the coeffi
       k_{T}=0.97((0.7)^{0.029T}+0.22) 　　　　　(6)
 
 
-.. figure:: IMG_6775.jpg
+.. figure:: FIGURE1.jpg
    :align: center
    :figclass: align-center
    :width: 700
@@ -36,7 +36,7 @@ In the TripleFrictionPendulumX element, the temperature-dependency of the coeffi
 
 For more information about the element formulation, please refer to the references at the end of this page.
 
-.. figure:: FIGURE2.tif
+.. figure:: FIGURE2.jpg
    :align: center
    :figclass: align-center
    :width: 700
