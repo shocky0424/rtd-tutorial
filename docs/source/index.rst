@@ -49,7 +49,7 @@ For more information about the element formulation, please refer to the referenc
 
 .. csv-table:: 
    :header: "Argument", "Type", "Description"
-   :widths: 5, 5, 40
+   :widths: 5, 5, 20
    
    $eleTag, |integer|, "Unique element object tag"
    $iNode $jNode, |integer| |integer|, "End nodes"
@@ -100,9 +100,9 @@ For more information about the element formulation, please refer to the referenc
 
 .. admonition:: Recorders
 
-**Typical Element Recorders**
+        **Typical Element Recorders**
 
-Typical recorders for two-node element are available in the TripleFrictionPendulumX element.
+        Typical recorders for two-node element are available in the TripleFrictionPendulumX element.
 
               .. csv-table:: 
                     :header: "Recorder", "Description"
@@ -113,9 +113,9 @@ Typical recorders for two-node element are available in the TripleFrictionPendul
                     basicForce, basic forces
                     basicDisplacement, basic displacements
 
-**TripleFrictionPendulumX Element Recorders**
+        **TripleFrictionPendulumX Element Recorders**
 
-Subscripts of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
+        Subscripts of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
 
               .. csv-table:: 
                     :header: "Recorder", "Description"
