@@ -2,7 +2,7 @@
 TripleFrictionPendulumX Element
 ^^^^^^^^^^^^^^^^
 
-This command is used to construct the TripleFrictionPendulumX element [KimAndConstantinou2022]_ [KimAndConstantinou2023a]_ object, which is the extension of the TripleFrictionPendulum element [DaoEtAl2013]_. The horizontal behavior of the element is achieved by the series model, which consists of properly combined hysteretic/frictional and multidirectional gap elements. 
+This command is used to construct the TripleFrictionPendulumX element [KimConstantinou2022]_ [KimConstantinou2023a]_ object, which is the extension of the TripleFrictionPendulum element [DaoEtAl2013]_. The horizontal behavior of the element is achieved by the series model, which consists of properly combined hysteretic/frictional and multidirectional gap elements. 
 
 Two main modifications in the TripleFrictionPendulumX element include that 1) displacement and velocity of the top of the bearing with respect to its bottom computed by the element are partitioned into components at each sliding surface and 2) the factorized friction model used in OpenSees element FPBearingPTV [KumarEtAl2015]_ is implemented to account for the effects of pressure, velocity and frictional heating on the friction coefficients at each sliding surfaces calculated by means of the partitioned displacements and velocities. The friction coefficient is given by equations (1) to (4) in which :math:`\mu_{ref}` is the reference high speed coefficient of friction at the initial time :math:`t = 0`, initial temperature :math:`T_{0} = 20℃` and initial pressure :math:`p_{0}`, :math:`a` is velocity rate parameter :math:`(= 100s/m)`, :math:`p` is the apparent pressure, and :math:`v` is the amplitude of the velocity.
 
@@ -16,7 +16,7 @@ Two main modifications in the TripleFrictionPendulumX element include that 1) di
   
       k_{T}=0.79((0.7)^{0.02T}+0.40) 　　　　　　(4)
 
-In the TripleFrictionPendulumX element, the temperature-dependency of the friction coefficient was expanded to account for additional cases [KimAndConstantinou2023b]_ beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
+In the TripleFrictionPendulumX element, the temperature-dependency of the friction coefficient was expanded to account for additional cases [KimConstantinou2023b]_ beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
 
 .. math::
 
@@ -129,7 +129,7 @@ For more information about the element formulation, please refer to the referenc
 
 .. admonition:: Example 
 
-   The following code constructs Example 3 in [KimAndConstantinou2023a]_. 
+   The following code constructs Example 3 in [KimConstantinou2023a]_. 
 
    1. **Tcl Code**
 
@@ -159,15 +159,15 @@ For more information about the element formulation, please refer to the referenc
       set d1 0.0716;			# Actual displacement capacity (m)
       set d2 0.5043;
       set d3 0.5043;
-      set b1 [expr 0.508];  	# Diameter of contact area at the sliding surface (m) 
+      set b1 [expr 0.508];  		# Diameter of contact area at the sliding surface (m) 
       set b2 [expr 0.711];  
       set b3 [expr 0.711];  
-      set r1 [expr $b1/2];  	# Radius of contact area at the sliding surface (m) 
+      set r1 [expr $b1/2];  		# Radius of contact area at the sliding surface (m) 
       set r2 [expr $b2/2];  
       set r3 [expr $b3/2];  
 
       set uy 0.001; 			# Yield displacement (m)   
-      set kvc 8000000000.; 	# vertical compression stiffness (N/m)
+      set kvc 8000000000.; 		# vertical compression stiffness (N/m)
       set kvt 1.; 			# vertical tension stiffness (N/m)
       set minFv 0.1; 			# minimum compression force in the bearing (N)
 
@@ -178,8 +178,8 @@ For more information about the element formulation, please refer to the referenc
 
       # Heat parameters
       set Diffu 0.444e-5;		# Thermal diffusivity (m^2/sec)
-      set Conduct 18; 		# Thermal conductivity (W/m*Celsius)
-      set Temperature0 20; 	# Initial temperature (Celsius)
+      set Conduct 18; 			# Thermal conductivity (W/m*Celsius)
+      set Temperature0 20; 		# Initial temperature (Celsius)
 
       # Friction coefficients (reference)
       set mu1 0.01; 
@@ -362,11 +362,11 @@ For more information about the element formulation, please refer to the referenc
 
    .. [DaoEtAl2013] Dao, N. D., Ryan, K. L., Sato, E. and Sasaki, T. (2013). “Predicting the displacement of triple pendulum bearings in a full-scale shaking experiment using a three-dimensional element”, Earthquake engineering and structural dynamics, 42(11), 1677-1695. https://doi.org/10.1002/eqe.2293.
 
-   .. [KimAndConstantinou2022] “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY. 
+   .. [KimConstantinou2022] “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY. 
 
-   .. [KimAndConstantinou2023a] “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics, 52(4), 979–997. https://doi.org/10.1002/eqe.3797.
+   .. [KimConstantinou2023a] “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics, 52(4), 979–997. https://doi.org/10.1002/eqe.3797.
 
-   .. [KimAndConstantinou2023b] “Development of Performance-based Testing Specifications for Seismic Isolators”, Report No. MCEER-23-xxxx, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
+   .. [KimConstantinou2023b] “Development of Performance-based Testing Specifications for Seismic Isolators”, Report No. MCEER-23-xxxx, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
 
    .. [KumarEtAl2015] “Characterizing friction in sliding isolation bearings”, Earthquake Engineering & Structural Dynamics, 44(9), 1409-1425. https://doi.org/10.1002/eqe.2524.
 
