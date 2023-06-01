@@ -131,7 +131,7 @@ For more information about the element formulation, please refer to the referenc
 
 .. admonition:: Example 
 
-   The following code constructs Example 3 in [KimConstantinou2023a]. 
+   The following code constructs Example 3 in [KimConstantinou2023a]_. 
 
    1. **Tcl Code**
 
