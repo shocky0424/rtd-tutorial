@@ -10,8 +10,8 @@ Two main modifications in the TripleFrictionPendulumX element include that 1) di
 
 .. math::
   
-      \mu(p,v,T)=\mu_{ref} k_{p} k_{v} k_{T} :label: (1)
-      label.alignment: right
+      \mu(p,v,T)=\mu_{ref} k_{p} k_{v} k_{T} 　　　　　(1)
+     
 
 .. math::
   :label: (2)
