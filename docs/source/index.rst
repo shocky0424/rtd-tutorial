@@ -16,7 +16,7 @@ Three main modifications in the TripleFrictionPendulumX element include: 1) comp
   
       k_{T}=0.79((0.7)^{0.02T}+0.40) 　　　　　　(4)
 
-In the TripleFrictionPendulumX element, the temperature-dependency of the friction coefficient was expanded beyond the single case described by equation (4).  Specifically, two additional cases were added, described by equations (5) and (6).  Figure 1 depicts the coefficient :math:`\k_T` as function of temperature for the three cases.  In the three cases, the value of coefficient :math:`\k_T` drops from the unity at the normal temperature to 1/3, 1/2 or 2/3 at approximately the temperature of :math:`200℃`.
+In the TripleFrictionPendulumX element, the temperature-dependency of the friction coefficient was expanded beyond the single case described by equation (4).  Specifically, two additional cases were added, described by equations (5) and (6).  Figure 1 depicts the coefficient :math:`k_T` as function of temperature for the three cases.  In the three cases, the value of coefficient :math:`k_T` drops from the unity at the normal temperature to 1/3, 1/2 or 2/3 at approximately the temperature of :math:`200℃`.
 
 .. math::
 
