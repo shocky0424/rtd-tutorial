@@ -173,7 +173,7 @@ For more information about the element formulation, please refer to the referenc
 
       set g 	9.81; 			# Gravity acceleration (m/s^2)
       set P 	13345e+03; 		# Load on top of TFP 
-      set Mass [expr $P/$g];  # Mass on top of TFP 
+      set Mass [expr $P/$g];            # Mass on top of TFP 
       set tol 1.e-5; 			# Relative tolerance for checking convergence
 
       # Heat parameters
