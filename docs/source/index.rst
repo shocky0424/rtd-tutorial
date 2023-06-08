@@ -2,9 +2,9 @@
 TripleFrictionPendulumX Element
 ^^^^^^^^^^^^^^^^
 
-This command is used to construct the TripleFrictionPendulumX element [KimConstantinou2022]_ [KimConstantinou2023a]_ object, which is the extension of the TripleFrictionPendulum element [DaoEtAl2013]_. The horizontal behavior of the element is achieved by the series model, which consists of properly combined hysteretic/frictional and multidirectional gap elements. 
+This command is used to construct the TripleFrictionPendulumX element [KimConstantinou2022]_ [KimConstantinou2023]_ object, which is an extension of the TripleFrictionPendulum element [DaoEtAl2013]_ capable of accounting for heating effects on the frictional behavior of triple Friction Pendulum isolators. The horizontal behavior of the element is achieved by the series model, which consists of properly combined hysteretic/frictional and multidirectional gap elements. 
 
-Two main modifications in the TripleFrictionPendulumX element include that 1) displacement and velocity of the top of the bearing with respect to its bottom computed by the element are partitioned into components at each sliding surface and 2) the factorized friction model used in OpenSees element FPBearingPTV [KumarEtAl2015]_ is implemented to account for the effects of pressure, velocity and frictional heating on the friction coefficients at each sliding surfaces calculated by means of the partitioned displacements and velocities. The friction coefficient is given by equations (1) to (4) in which :math:`\mu_{ref}` is the reference high speed coefficient of friction at the initial time :math:`t = 0`, initial temperature :math:`T_{0} = 20℃` and initial pressure :math:`p_{0}`, :math:`a` is velocity rate parameter :math:`(= 100s/m)`, :math:`p` is the apparent pressure, and :math:`v` is the amplitude of the velocity.
+Three main modifications in the TripleFrictionPendulumX element include: 1) computation of the displacement and velocity histories at each of the four sliding interfaces of the isolator, 2) computation of the temperature history at each sliding interface, and 3) accounting for the dependency of the coefficient of friction on the instantaneous temperature at each sliding interface.  The factorized friction model used in OpenSees element FPBearingPTV [KumarEtAl2015]_ is used to account for the effects of pressure, velocity, and temperature on the friction coefficients at each sliding surfaces, with the latter effect expanded to include more possible friction-temperature laws. In OpenSees element FPBearingPTV, the friction coefficient is given by equations (1) to (4) in which :math:`\mu_{ref}` is the reference high speed coefficient of friction at the initial time :math:`t = 0`, initial temperature :math:`T_{0} = 20℃` and initial pressure :math:`p_{0}`, :math:`a` is velocity rate parameter :math:`(= 100s/m)`, :math:`p` is the apparent pressure, and :math:`v` is the amplitude of the velocity.
 
 .. math::
   
@@ -16,7 +16,7 @@ Two main modifications in the TripleFrictionPendulumX element include that 1) di
   
       k_{T}=0.79((0.7)^{0.02T}+0.40) 　　　　　　(4)
 
-In the TripleFrictionPendulumX element, the temperature-dependency of the friction coefficient was expanded to account for additional cases [KimConstantinou2023b]_ beyond the single case described by equation (4) which was implemented in the FPbearingPTV element.  Specifically, two additional cases were added, described by equations (5) and (6), and in Figure 1.  
+In the TripleFrictionPendulumX element, the temperature-dependency of the friction coefficient was expanded beyond the single case described by equation (4).  Specifically, two additional cases were added, described by equations (5) and (6).  Figure 1 depicts the coefficient :math:`\k_T` as function of temperature for the three cases.  In the three cases, the value of coefficient :math:`\k_T` drops from the unity at the normal temperature to 1/3, 1/2 or 2/3 at approximately the temperature of :math:`200℃`.
 
 .. math::
 
@@ -58,19 +58,19 @@ For more information about the element formulation, please refer to the referenc
    $kTFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous temperature at the sliding surface"
    $kvFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous velocity at the sliding surface. :math:`k_{v}=(1-0.5e^{-av})`"
    $Mu1 $Mu2 $Mu3, |float| |float| |float|, "Reference friction coefficients, :math:`\mu_i`"
-   $L1 $L2 $L3, |float| |float| |float|, "Effective radii of cuvature. :math:`L_i = R_i – h_i`"
-   $d1_star $d2_star $d3_star, |float| |float| |float|, "Actual displacement limits of pendulums. :math:`d_i^* = L_i/R_i·d_i`, :math:`d_i` = Nominal displacement capacity of each sliding interface"
+   $L1 $L2 $L3, |float| |float| |float|, "Effective radii. :math:`L_i = R_i – h_i`"
+   $d1_star $d2_star $d3_star, |float| |float| |float|, "Actual displacement capacity of sliding interfaces. :math:`d_i^* = L_i/R_i·d_i`, :math:`d_i` = Nominal displacement capacity of each sliding interface. Displacement limit of the bearing is :math:`u_{limit} = 2d_1^* + d_2^* + d_3^* + b_2^*/2`, where :math:`b_2` is a diameter of rigid slider."
    $b1 $b2 $b3, |float| |float| |float|, "Diameters of the rigid slider and the two inner slide plates"
    $W, |float|, "Axial force used for the first trial of the first analysis step"
-   $uy, |float|, "Lateral displacement where sliding of the bearing starts. Recommended value = 0.025 to 1 mm. A smaller value may cause convergence problem"
-   $kvt, |float|, "Tension stiffness kvt of the bearing"
+   $uy, |float|, "Lateral displacement where sliding of the bearing starts. Recommended value = 0.025 to 1 mm. Smaller values may cause convergence problem or may slow the program execution."
+   $kvt, |float|, "Tension stiffness kvt of the bearing. Use a small, non-zero value to avoid numerical problems."
    $minFv (≥ 0), |float|, "Minimum vertical compression force in the bearing used for computing the horizontal tangent stiffness matrix from the normalized tangent stiffness matrix of the element" 
    $Tol, |float|, "Relative tolerance for checking the convergence of the element. Recommended value = 1.e-10 to 1.e-3"
    $refPressure1 $refPressure2 $refPressure3, |float| |float| |float|, "Reference axial pressures (the bearing pressure under static loads)"
    $Diffusivity, |float|, "Thermal diffusivity of steel (unit: m2/sec) (= 0.444*10-5 for stainless steel)"
    $Conductivity, |float|, "Thermal conductivity of steel (unit: W/m℃) (= 18 for stainless steel)"
-   $Temperature0, |float|, "Initial temperature (℃)"
-   $rateparameter, |float|, "The exponent that determines the shape of the coefficient of friction vs. sliding velocity curve (unit: sec/m, 100sec/m is used normally)"
+   $Temperature0, |float|, "Initial temperature (℃). Use 20℃ as model of friction-temperature is based on 20℃."
+   $rateparameter, |float|, "Parameter in relationship of coefficient of friction and sliding velocity (unit: sec/m, 100sec/m is used normally)"
    $unit, |integer|, "Tag to identify the unit from the list below. 
    
    1: N, m, s, ℃ 
@@ -113,23 +113,23 @@ For more information about the element formulation, please refer to the referenc
 
         **TripleFrictionPendulumX Element Recorders**
 
-        Subscripts of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
+        Subscript "i" of the response quantities in the following recorders refer to the numbering of the sliding interfaces, starting from bottom to top sliding interfaces. 
 
               .. csv-table:: 
                     :header: "Recorder", "Description"
                     :widths: 5, 20
    
-                    compDisplacement, "Displacements (:math:`u_i`) and velocities (:math:`v_i`) at each sliding surface in the x and y directions :math:`(u_{2x}+u_{3x})/2`, :math:`u_{1x},u_{4x}`,  :math:`(u_{2y}+u_{3y})/2`, :math:`u_{1y}`, :math:`u_{4y}`, :math:`(v_{2x}+v_{3x})/2`, :math:`v_{1x}`, :math:`v_{4x}`,  :math:`(v_{2y}+v_{3y})/2`, :math:`v_{1y}`, :math:`v_{4y}` in accordance with Approach 1 (See Section 3 in Kim and Constantinou, 2022). 
+                    compDisplacement, "Displacements (:math:`u_i`) and velocities (:math:`v_i`) at each sliding surface in the x and y directions :math:`(u_{2x}+u_{3x})/2`, :math:`u_{1x},u_{4x}`,  :math:`(u_{2y}+u_{3y})/2`, :math:`u_{1y}`, :math:`u_{4y}`, :math:`(v_{2x}+v_{3x})/2`, :math:`v_{1x}`, :math:`v_{4x}`,  :math:`(v_{2y}+v_{3y})/2`, :math:`v_{1y}`, :math:`v_{4y}` in accordance with Approach 1 (See Section 3 in [KimConstantinou2022]_. 
    
                     *Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>compDisplacement*"
-                    Parameters, "temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`),  friction coefficients (:math:`\mu_{2,3}`, :math:`\mu_1`, :math:`\mu_4`), heat fluxes (:math:`HeatFlux_{2,3}`, :math:`HeatFlux_{1}`, :math:`HeatFlux_4`), pressure dependency factors (:math:`k_{p2,3}`, :math:`k_{p1}`, :math:`k_{p4}`), temperature dependency factors (:math:`k_{T2,3}`, :math:`k_{T1}`, :math:`k_{T4}`), and velocity dependency factors (:math:`k_{v2,3}`, :math:`k_{v1}`, :math:`k_{v4}`).
+                    Parameters, "Temperatures (:math:`T_{2,3}`, :math:`T_1`, :math:`T_4`), coefficients of friction (:math:`\mu_{2,3}`, :math:`\mu_1`, :math:`\mu_4`), heat fluxes (:math:`HeatFlux_{2,3}`, :math:`HeatFlux_{1}`, :math:`HeatFlux_4`), pressure dependency factors (:math:`k_{p2,3}`, :math:`k_{p1}`, :math:`k_{p4}`), temperature dependency factors (:math:`k_{T2,3}`, :math:`k_{T1}`, :math:`k_{T4}`), and velocity dependency factors (:math:`k_{v2,3}`, :math:`k_{v1}`, :math:`k_{v4}`).
       
                     *Example: recorder Element<-file $fileName> -time<-ele ($ele1 $ele2…)>Parameters*"
 
 
 .. admonition:: Example 
 
-   The following code constructs Example 3 in [KimConstantinou2023a]_. 
+   The following code constructs Example 3 in [KimConstantinou2023]_. 
 
    1. **Tcl Code**
 
@@ -153,25 +153,25 @@ For more information about the element formulation, please refer to the referenc
       #----------------------------------------------------------------------------
 
       # TFP Geomoetry of Configuration A 
-      set L1 0.3937;			# Effective radii of curvature (m)
+      set L1 0.3937;			# Effective radii (m)
       set L2 3.7465;
       set L3 3.7465;
       set d1 0.0716;			# Actual displacement capacity (m)
       set d2 0.5043;
       set d3 0.5043;
-      set b1 [expr 0.508];  		# Diameter of contact area at the sliding surface (m) 
+      set b1 [expr 0.508];  		# Diameter of the rigid slider and the two inner slide plate (m) 
       set b2 [expr 0.711];  
       set b3 [expr 0.711];  
-      set r1 [expr $b1/2];  		# Radius of contact area at the sliding surface (m) 
+      set r1 [expr $b1/2];  		# Radius of of the rigid slider and the two inner slide plate (m) 
       set r2 [expr $b2/2];  
       set r3 [expr $b3/2];  
 
       set uy 0.001; 			# Yield displacement (m)   
-      set kvc 8000000000.; 		# vertical compression stiffness (N/m)
-      set kvt 1.; 			# vertical tension stiffness (N/m)
-      set minFv 0.1; 			# minimum compression force in the bearing (N)
+      set kvc 8000000000.; 		# Vertical compression stiffness (N/m)
+      set kvt 1.; 			# Vertical tension stiffness (N/m)
+      set minFv 0.1; 			# Minimum compression force in the bearing (N)
 
-      set g 	9.81; 			# gravity acceleration (m/s^2)
+      set g 	9.81; 			# Gravity acceleration (m/s^2)
       set P 	13345e+03; 		# Load on top of TFP 
       set Mass [expr $P/$g];  # Mass on top of TFP 
       set tol 1.e-5; 			# Relative tolerance for checking convergence
@@ -364,13 +364,11 @@ For more information about the element formulation, please refer to the referenc
 
    .. [KimConstantinou2022] “Modeling triple friction pendulum bearings in program OpenSees including frictional heating effects”, Report No. MCEER-22-0001, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY. 
 
-   .. [KimConstantinou2023a] “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics, 52(4), 979–997. https://doi.org/10.1002/eqe.3797.
-
-   .. [KimConstantinou2023b] “Development of Performance-based Testing Specifications for Seismic Isolators”, Report No. MCEER-23-xxxx, Multidisciplinary Center for Earthquake Engineering Research, Buffalo, NY.
+   .. [KimConstantinou2023] “Modeling frictional heating effects in triple friction pendulum isolators”, Earthquake Engineering & Structural Dynamics, 52(4), 979–997. https://doi.org/10.1002/eqe.3797.
 
    .. [KumarEtAl2015] “Characterizing friction in sliding isolation bearings”, Earthquake Engineering & Structural Dynamics, 44(9), 1409-1425. https://doi.org/10.1002/eqe.2524.
 
 
 Code Developed by: **Hyun-myung Kim** and **Michael C. Constantinou**, University at Buffalo
 
-For code inquires or bug reporting, please contact: Hyun-myung Kim (hkim59@buffalo.edu)
+For bug reporting, please contact: Hyun-myung Kim (hkim59@buffalo.edu)
