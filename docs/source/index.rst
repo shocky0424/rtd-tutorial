@@ -51,7 +51,7 @@ For more information about the element formulation, please refer to the referenc
    
    $eleTag, |integer|, "Unique element object tag."
    $iNode $jNode, |integer| |integer|, "End nodes."
-   $Tag, |integer|, ":math:`1`: for Approach 1 (suitable for all types of analysis), 
+   $Tag, |integer|, ":math:`1`: for Approach 1 (suitable for all types of analysis) 
    
    :math:`0`: for Approach 2 (1D displacement control analysis only)"
    $vertMatTag, |float|, "Pre-defined material tag for compression behavior of the bearing."
@@ -65,17 +65,19 @@ For more information about the element formulation, please refer to the referenc
    :math:`k_{v}=(1-0.5e^{-av})`"
    $Mu1 $Mu2 $Mu3, |float| |float| |float|, "Reference friction coefficients, :math:`\mu_i`"
    $L1 $L2 $L3, |float| |float| |float|, "Effective radii, :math:`L_i = R_i – h_i`"
-   $d1_star $d2_star $d3_star, |float| |float| |float|, "Actual displacement capacity of sliding interfaces. :math:`d_i^* = L_i/R_i·d_i`, 
-   
-   :math:`d_i` = Nominal displacement capacity of each sliding interface. 
+   $d1_star $d2_star $d3_star, |float| |float| |float|, "Actual displacement capacity of sliding interfaces. :math:`d_i^* = L_i/R_i·d_i`, :math:`d_i` = Nominal displacement capacity of each sliding interface. 
    
    Displacement limit of the bearing is :math:`u_{limit} = 2d_1^* + d_2^* + d_3^* + b_2^*/2`, where :math:`b_2` is a diameter of rigid slider."
    $b1 $b2 $b3, |float| |float| |float|, "Diameters of the rigid slider and the two inner slide plates"
    $W, |float|, "Axial force used for the first trial of the first analysis step."
-   $uy, |float|, "Lateral displacement where sliding of the bearing starts. Recommended value = :math:`0.025` to :math:`1 mm`. Smaller values may cause convergence problem or may slow the program execution."
+   $uy, |float|, "Lateral displacement where sliding of the bearing starts. 
+   
+   Recommended value = :math:`0.025` to :math:`1 mm`. Smaller values may cause convergence problem or may slow the program execution."
    $kvt, |float|, "Tension stiffness :math:`k_{vt}` of the bearing. Use a small, non-zero value to avoid numerical problems."
    $minFv (≥ 0), |float|, "Minimum vertical compression force in the bearing used for computing the horizontal tangent stiffness matrix from the normalized tangent stiffness matrix of the element." 
-   $Tol, |float|, "Relative tolerance for checking the convergence of the element. Recommended value = :math:`10^{-10}` to :math:`10^{-3}`"
+   $Tol, |float|, "Relative tolerance for checking the convergence of the element. 
+   
+   Recommended value = :math:`10^{-10}` to :math:`10^{-3}`"
    $refPressure1 $refPressure2 $refPressure3, |float| |float| |float|, "Reference axial pressures (the bearing pressure under static loads)"
    $Diffusivity, |float|, "Thermal diffusivity of steel (unit: :math:`m^2/sec`). 
    
