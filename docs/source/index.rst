@@ -4,7 +4,7 @@ TripleFrictionPendulumX Element
 
 This command is used to construct the TripleFrictionPendulumX element [KimConstantinou2022]_ [KimConstantinou2023]_ object, which is an extension of the TripleFrictionPendulum element [DaoEtAl2013]_ capable of accounting for heating effects on the frictional behavior of triple friction pendulum isolators. The horizontal behavior of the element is achieved by the series model, which consists of properly combined hysteretic/frictional and multidirectional gap elements. 
 
-Three main modifications in the TripleFrictionPendulumX element include: 1) computation of the displacement and velocity histories at each of the four sliding interfaces of the isolator, 2) computation of the temperature history at each sliding interface, and 3) accounting for the dependency of the coefficient of friction on the instantaneous temperature at each sliding interface.  The factorized friction model used in OpenSees element FPBearingPTV [KumarEtAl2015]_ is used to account for the effects of pressure, velocity, and temperature on the friction coefficients at each sliding surfaces, with the latter effect expanded to include more possible friction-temperature laws. In OpenSees element FPBearingPTV, the friction coefficient is given by equations (1) to (4) in which :math:`\mu_{ref}` is the reference high speed coefficient of friction at the initial time :math:`t = 0`, initial temperature :math:`T_{0} = 20℃` and initial pressure :math:`p_{0}`, :math:`a` is velocity rate parameter :math:`(= 100s/m)`, :math:`p` is the apparent pressure, and :math:`v` is the amplitude of the velocity.
+Three main modifications in the TripleFrictionPendulumX element include: 1) computation of the displacement and velocity histories at each of the four sliding interfaces of the isolator, 2) computation of the temperature history at each sliding interface, and 3) accounting for the dependency of the coefficient of friction on the instantaneous temperature at each sliding interface.  The factorized friction model used in OpenSees element FPBearingPTV [KumarEtAl2015]_ is used to account for the effects of pressure, velocity, and temperature on the friction coefficients at each sliding surfaces, with the latter effect expanded to include more possible friction-temperature laws. In OpenSees element FPBearingPTV, the friction coefficient is given by equations (1) to (4) in which :math:`\mu_{ref}` is the reference high speed coefficient of friction at the initial time :math:`t = 0`, initial temperature :math:`T_{0} = 20℃` and initial pressure :math:`p_{0}`, :math:`a` is velocity rate parameter :math:`(= 100sec/m)`, :math:`p` is the apparent pressure, and :math:`v` is the amplitude of the velocity.
 
 .. math::
   
@@ -51,12 +51,12 @@ For more information about the element formulation, please refer to the referenc
    
    $eleTag, |integer|, "Unique element object tag."
    $iNode $jNode, |integer| |integer|, "End nodes."
-   $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis), 0 for Approach 2 (1D displacement control analysis only)"
+   $Tag, |integer|, ":math:`1`: for Approach 1 (suitable for all types of analysis), :math:`0`: for Approach 2 (1D displacement control analysis only)"
    $vertMatTag, |float|, "Pre-defined material tag for compression behavior of the bearing."
    $rotZMatTag $rotXMatTag $rotYMatTag, |integer| |integer| |integer|, "Pre-defined material tags for rotational behavior about 3-axis, 1-axis and 2-axis, respectively."
-   $kpFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous axial pressure. :math:`k_{p}=0.7^{0.02(p-p_{0})}`"  
-   $kTFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous temperature at the sliding surface."
-   $kvFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous velocity at the sliding surface. :math:`k_{v}=(1-0.5e^{-av})`"
+   $kpFactor, |integer|, ":math:`1`: if the coefficient of friction is a function of instantaneous axial pressure. :math:`k_{p}=0.7^{0.02(p-p_{0})}`"  
+   $kTFactor, |integer|, ":math:`1`: if the coefficient of friction is a function of instantaneous temperature at the sliding surface."
+   $kvFactor, |integer|, ":math:`1`: if the coefficient of friction is a function of instantaneous velocity at the sliding surface. :math:`k_{v}=(1-0.5e^{-av})`"
    $Mu1 $Mu2 $Mu3, |float| |float| |float|, "Reference friction coefficients, :math:`\mu_i`"
    $L1 $L2 $L3, |float| |float| |float|, "Effective radii, :math:`L_i = R_i – h_i`"
    $d1_star $d2_star $d3_star, |float| |float| |float|, "Actual displacement capacity of sliding interfaces. :math:`d_i^* = L_i/R_i·d_i`, :math:`d_i` = Nominal displacement capacity of each sliding interface. Displacement limit of the bearing is :math:`u_{limit} = 2d_1^* + d_2^* + d_3^* + b_2^*/2`, where :math:`b_2` is a diameter of rigid slider."
@@ -73,21 +73,21 @@ For more information about the element formulation, please refer to the referenc
    $rateparameter, |float|, "Parameter in relationship of coefficient of friction and sliding velocity. (unit: :math:`sec/m`, :math:`100sec/m` is used normally)"
    $unit, |integer|, "Tag to identify the unit from the list below. 
    
-   1: :math:`N, m, s, ℃`
+   1: :math:`N, m, sec, ℃`
    
-   2: :math:`kN, m, s, ℃`
+   2: :math:`kN, m, sec, ℃`
    
-   3: :math:`N, mm, s, ℃`
+   3: :math:`N, mm, sec, ℃`
    
-   4: :math:`kN, mm, s, ℃`
+   4: :math:`kN, mm, sec, ℃`
    
-   5: :math:`lb, in, s, ℃`
+   5: :math:`lb, in, sec, ℃`
    
-   6: :math:`kip, in, s, ℃`
+   6: :math:`kip, in, sec, ℃`
    
-   7: :math:`lb, ft, s, ℃`
+   7: :math:`lb, ft, sec, ℃`
    
-   8: :math:`kip, ft, s, ℃`"      
+   8: :math:`kip, ft, sec, ℃`"      
    $kTmodel, |integer|, "Temperature-dependent friction models (3)
    
    1: :math:`k_{T}=0.79((0.7)^{0.02T}+0.40)` (:math:`k_{T} = 1/2` at :math:`200℃`)
