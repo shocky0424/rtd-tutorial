@@ -73,28 +73,28 @@ For more information about the element formulation, please refer to the referenc
    $rateparameter, |float|, "Parameter in relationship of coefficient of friction and sliding velocity. (unit: :math:`sec/m`, :math:`100sec/m` is used normally)"
    $unit, |integer|, "Tag to identify the unit from the list below. 
    
-   1: :math:`N, m, sec, ℃`
+   :math:`1`: :math:`N, m, sec, ℃`
    
-   2: :math:`kN, m, sec, ℃`
+   :math:`2`: :math:`kN, m, sec, ℃`
    
-   3: :math:`N, mm, sec, ℃`
+   :math:`3`: :math:`N, mm, sec, ℃`
    
-   4: :math:`kN, mm, sec, ℃`
+   :math:`4`: :math:`kN, mm, sec, ℃`
    
-   5: :math:`lb, in, sec, ℃`
+   :math:`5`: :math:`lb, in, sec, ℃`
    
-   6: :math:`kip, in, sec, ℃`
+   :math:`6`: :math:`kip, in, sec, ℃`
    
-   7: :math:`lb, ft, sec, ℃`
+   :math:`7`: :math:`lb, ft, sec, ℃`
    
    8: :math:`kip, ft, sec, ℃`"      
    $kTmodel, |integer|, "Temperature-dependent friction models (3)
    
-   1: :math:`k_{T}=0.79(0.7^{0.02T}+0.40)` (:math:`k_{T} = 1/2` at :math:`200℃`)
+   :math:`1`: :math:`k_{T}=0.79(0.7^{0.02T}+0.40)` (:math:`k_{T} = 1/2` at :math:`200℃`)
    
-   2: :math:`k_{T}=0.97(0.7^{0.029T}+0.22)` (:math:`k_{T} = 1/3` at :math:`200℃`)
+   :math:`2`: :math:`k_{T}=0.97(0.7^{0.029T}+0.22)` (:math:`k_{T} = 1/3` at :math:`200℃`)
    
-   3: :math:`k_{T}=0.84(0.7^{0.0085T}+0.25)` (:math:`k_{T} = 2/3` at :math:`200℃`)"
+   :math:`3`: :math:`k_{T}=0.84(0.7^{0.0085T}+0.25)` (:math:`k_{T} = 2/3` at :math:`200℃`)"
 
 .. admonition:: Recorders
 
