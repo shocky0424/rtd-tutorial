@@ -65,7 +65,7 @@ For more information about the element formulation, please refer to the referenc
    $uy, |float|, "Lateral displacement where sliding of the bearing starts. Recommended value = :math:`0.025 to 1 mm`. Smaller values may cause convergence problem or may slow the program execution."
    $kvt, |float|, "Tension stiffness :math:`k_{vt}` of the bearing. Use a small, non-zero value to avoid numerical problems."
    $minFv (≥ 0), |float|, "Minimum vertical compression force in the bearing used for computing the horizontal tangent stiffness matrix from the normalized tangent stiffness matrix of the element." 
-   $Tol, |float|, "Relative tolerance for checking the convergence of the element. Recommended value = :math:`10^{-10} to 10^{-3}`"
+   $Tol, |float|, "Relative tolerance for checking the convergence of the element. Recommended value = :math:`10^{-10}` to :math:`10^{-3}`"
    $refPressure1 $refPressure2 $refPressure3, |float| |float| |float|, "Reference axial pressures (the bearing pressure under static loads)"
    $Diffusivity, |float|, "Thermal diffusivity of steel (unit: :math:`m^2/sec`). (:math:`= 0.444*10^{-5}` for stainless steel)"
    $Conductivity, |float|, "Thermal conductivity of steel (unit: :math:`W/m℃`). (:math:`= 18` for stainless steel)"
