@@ -54,7 +54,7 @@ For more information about the element formulation, please refer to the referenc
    $Tag, |integer|, "1 for Approach 1 (suitable for all types of analysis), 0 for Approach 2 (1D displacement control analysis only)"
    $vertMatTag, |float|, "Pre-defined material tag for compression behavior of the bearing"
    $rotZMatTag $rotXMatTag $rotYMatTag, |integer| |integer| |integer|, "Pre-defined material tags for rotational behavior about 3-axis, 1-axis and 2-axis, respectively."
-   $kpFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous axial pressure. :math:`k_{p}=(0.7)^{0.02(p-p_{0})}`"  
+   $kpFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous axial pressure. :math:`k_{p}=0.7^{0.02(p-p_{0})}`"  
    $kTFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous temperature at the sliding surface"
    $kvFactor, |integer|, "1.0 if the coefficient of friction is a function of instantaneous velocity at the sliding surface. :math:`k_{v}=(1-0.5e^{-av})`"
    $Mu1 $Mu2 $Mu3, |float| |float| |float|, "Reference friction coefficients, :math:`\mu_i`"
